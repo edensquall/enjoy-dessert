@@ -1,0 +1,40 @@
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4 mx-1" *ngIf="userInfo">
+    <div class="col">
+        <div class="member-card shadow-sm border bg-white p-5">
+            <h2 class="member-card-title">嗨，{{userInfo.displayName}}</h2>
+            <div class="member-card-paragraph">
+                <p class="fs-3">您目前是 <strong>{{userInfo.gradeTitle}}</strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="member-card shadow-sm border bg-white p-5">
+            <h2 class="member-card-title">我的個人資料</h2>
+            <div class="member-card-paragraph">
+                <p>{{userInfo.email}}</p>
+                <p class="fs-3"><strong>{{userInfo.userName}}</strong></p>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="member-card shadow-sm border bg-white p-5">
+            <h2 class="member-card-title">我的購物足跡</h2>
+            <div class="member-card-paragraph">
+                <p>最近一筆訂單編號</p>
+                <ng-container *ngIf="order">
+                    <a class="fs-3" routerLink="/member/order/{{order.id}}">#{{order.id}}</a>
+                </ng-container>
+                <ng-container *ngIf="!order">
+                    <p>尚無訂單紀錄</p>
+                </ng-container>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="member-card shadow-sm border bg-white p-5">
+            <div class="member-card-paragraph h-100 d-flex justify-content-center align-items-center">
+                <a (click)="logout()" class="fs-3 cursor-pointer">登出</a>
+            </div>
+        </div>
+    </div>
+</div>

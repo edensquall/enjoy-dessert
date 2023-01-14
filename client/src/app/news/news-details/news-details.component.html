@@ -1,0 +1,4 @@
+<div class="section container-xl" *ngIf="news">
+    <h1 class="mt-0 mb-5 text-center">{{news.title}}</h1>
+    <div class="news-detail-content mt-5 mb-5" [innerHTML]="news.content | safeHtml"></div>
+</div>

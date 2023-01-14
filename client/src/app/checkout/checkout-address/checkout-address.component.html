@@ -1,0 +1,42 @@
+<div [formGroup]="checkoutForm">
+    <div class="px-1 px-sm-3 px-lg-5 py-5" formGroupName="addressForm">
+        <div class="row ml-5">
+            <div class="d-flex justify-content-between align-items-center mb-5">
+                <h3>地址</h3>
+                <button (click)="saveUserAddress()"
+                    [disabled]="!checkoutForm.get('addressForm')?.valid || !checkoutForm.get('addressForm')?.dirty"
+                    class="btn btn-outline-success mb-3">
+                    儲存為預設地址
+                </button>
+            </div>
+            <div class="col-12 col-sm-6 mb-3">
+                <app-text-input formControlName="firstName" [label]="'姓'"></app-text-input>
+            </div>
+            <div class="col-12 col-sm-6 mb-3">
+                <app-text-input formControlName="lastName" [label]="'名'"></app-text-input>
+            </div>
+            <div class="col-12 col-sm-6 mb-3">
+                <app-text-input formControlName="phoneNumber" [label]="'電話'"></app-text-input>
+            </div>
+            <div class="col-12 col-sm-6 mb-3">
+                <app-text-input formControlName="zipCode" [label]="'郵遞區號'"></app-text-input>
+            </div>
+            <div class="col-12 col-sm-6 mb-3">
+                <app-text-input formControlName="county" [label]="'縣'"></app-text-input>
+            </div>
+            <div class="col-12 col-sm-6 mb-3">
+                <app-text-input formControlName="city" [label]="'市/鄉鎮'"></app-text-input>
+            </div>
+            <div class="col-12 mb-3">
+                <app-text-input formControlName="street" [label]="'街道，巷弄，門號，樓層'"></app-text-input>
+            </div>
+        </div>
+        <div class="d-flex justify-content-between flex-row">
+            <button class="btn btn-outline-secondary btn-lg me-3" cdkStepperPrevious><i class="fa fa-angle-left"></i>
+                回運送</button>
+            <button href="checkout_review.html" class="btn btn-primary btn-lg"
+                [disabled]="checkoutForm.get('addressForm')?.invalid" cdkStepperNext>前往檢視 <i
+                    class="fa fa-angle-right"></i></button>
+        </div>
+    </div>
+</div>

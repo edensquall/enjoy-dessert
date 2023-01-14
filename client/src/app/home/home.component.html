@@ -1,0 +1,61 @@
+<div class="hero pb-5 px-0 container-xxl">
+  <div id="carouselIndicator" class="carousel slide carousel-fade" data-bs-ride="carousel">
+    <div class="carousel-inner">
+      <div class="carousel-item active" [ngClass]="{'active': i === 0}" *ngFor="let slide of slides; let i = index">
+        <a href="{{slide.url}}">
+          <img src="{{slide.imageUrl}}" class="w-100" alt="...">
+        </a>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselIndicator" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselIndicator" data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+<div class="section container">
+  <div class="feature-wrapper row">
+    <div class="col-12 col-sm-6 col-md-5"><img src="/assets/images/Dessert_Shop.jpg" loading="lazy"
+        srcset="/assets/images/Dessert_Shop-p-500.jpg 500w, /assets/images/Dessert_Shop-p-800.jpg 800w, /assets/images/Dessert_Shop-p-1080.jpg 1080w, /assets/images/Dessert_Shop.jpg 1130w"
+        sizes="(max-width: 479px) 97vw, (max-width: 767px) 46vw, (max-width: 991px) 44vw, 42vw" width="100%" alt=""
+        class="feature-image"></div>
+    <div class="col-12 col-sm-6 col-md-6">
+      <div>
+        <h1 class="mt-0 mb-3">傾注甜點本質</h1>
+        <p class="feature-paragraph">透過細緻的調溫、精確的火侯與焙烤製作時間控制，配合十多年經歷的甜點職人味蕾嚴格把關及製作工法，將每一項食材最原始美好的特性發揮到最大值。</p>
+        <a routerLink="shop" class="d-flex align-items-center text-decoration-none">
+          <div>前往甜點</div><img src="/assets/images/arrow_right_alt_24px.svg" loading="lazy" alt="">
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="section container">
+  <div class="feature-wrapper row reverse">
+    <div class="col-12 col-sm-6 col-md-6">
+      <div>
+        <h1 class="mt-0 mb-3">匯集迷人食材</h1>
+        <p class="feature-paragraph">開業以來的每種原料、每款甜點，都經過不斷的烘焙實驗和篩選，好的原料能讓我們把甜點當作品一樣自信交出，以最佳的風味與品質呈現。</p>
+        <a routerLink="shop" class="d-flex align-items-center text-decoration-none">
+          <div>前往甜點</div><img src="/assets/images/arrow_right_alt_24px.svg" loading="lazy" alt="">
+        </a>
+      </div>
+    </div>
+    <div class="col-12 col-sm-6 col-md-5"><img src="/assets/images/Market.jpg" loading="lazy"
+        sizes="(max-width: 479px) 97vw, (max-width: 767px) 46vw, (max-width: 991px) 44vw, 42vw"
+        srcset="/assets/images/Market-p-500.jpg 500w, /assets/images/Market-p-800.jpg 800w, /assets/images/Market-p-1080.jpg 1080w, /assets/images/Market.jpg 1130w"
+        width="100%" alt="" class="feature-image"></div>
+  </div>
+</div>
+<div class="section container">
+  <h1 class="text-center mt-0 mb-5">熱銷商品</h1>
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <div class="col" *ngFor="let bestseller of bestsellers">
+      <app-bestseller-item [bestseller]="bestseller"></app-bestseller-item>
+    </div>
+  </div>
+</div>

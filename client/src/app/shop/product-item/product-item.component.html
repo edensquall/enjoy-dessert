@@ -1,0 +1,9 @@
+<div class="card h-100">
+    <a routerLink="/shop/{{product.id}}">
+        <img src="{{product.thumbnailUrl}}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">{{product.price | currency:'TWD':'symbol':'1.0'}}</p>
+        </div>
+    </a>
+</div>

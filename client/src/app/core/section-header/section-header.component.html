@@ -1,0 +1,8 @@
+<ng-container *ngIf="(breadcrumb$ | async) as breadcrumbs">
+    <div class="breadcrumb pt-2 pb-2"
+        *ngIf="breadcrumbs.length > 0 && breadcrumbs[breadcrumbs.length-1].label !== '首頁'">
+        <div class="container-xl">
+            <xng-breadcrumb></xng-breadcrumb>
+        </div>
+    </div>
+</ng-container>

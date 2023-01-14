@@ -1,0 +1,28 @@
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4 mx-1">
+    <div class="col">
+        <div class="shadow-sm border bg-white">
+            <form [formGroup]="basicInfoForm" (ngSubmit)="onBasicInfoSubmit()">
+                <h2 class="text-center mt-0 mb-5">個人基本資料</h2>
+                <app-text-input formControlName="displayName" [label]="'顯示名稱'"></app-text-input>
+                <app-text-input formControlName="phoneNumber" [label]="'電話號碼'" [type]="'tel'"></app-text-input>
+                <app-text-input formControlName="email" [label]="'Email'" [type]="'email'"></app-text-input>
+                <button class="btn btn-primary w-100 pt-3 pb-3" type="submit"
+                    [disabled]="basicInfoForm.invalid || basicInfoForm.dirty == false">修改個人資料</button>
+            </form>
+        </div>
+    </div>
+    <div class="col">
+        <div class="shadow-sm border bg-white">
+            <form [formGroup]="newPasswordForm" (ngSubmit)="onNewPasswordSubmit()">
+                <h2 class="text-center mt-0 mb-5">修改密碼</h2>
+                <app-text-input formControlName="password" [label]="'當前密碼'" [type]="'password'"></app-text-input>
+                <app-text-input formControlName="newPassword" [label]="'新密碼'" [type]="'password'"></app-text-input>
+                <app-text-input formControlName="newPasswordConfirm" [label]="'新密碼確認'"
+                    [type]="'password'"></app-text-input>
+                <app-validation-summary [errors$]="newPasswordFormErrors$"></app-validation-summary>
+                <button class="btn btn-primary w-100 pt-3 pb-3" type="submit"
+                    [disabled]="newPasswordForm.invalid || newPasswordForm.dirty == false">修改密碼</button>
+            </form>
+        </div>
+    </div>
+</div>

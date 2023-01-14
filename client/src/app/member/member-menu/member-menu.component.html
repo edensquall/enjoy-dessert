@@ -1,0 +1,6 @@
+<ul class="list-group">
+    <li routerLink="/member/member-center" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="aside-item list-group-item list-group-item-action">會員中心</li>
+    <li routerLink="/member/personal-info" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}" class="aside-item list-group-item list-group-item-action">個人資料</li>
+    <li routerLink="/member/order" routerLinkActive="active" class="aside-item list-group-item list-group-item-action">訂單查詢</li>
+    <li (click)="logout()" class="aside-item list-group-item list-group-item-action">登出</li>
+</ul>

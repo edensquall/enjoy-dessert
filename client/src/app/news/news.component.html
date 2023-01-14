@@ -1,0 +1,16 @@
+<div class="section container">
+    <h1 class="mt-0 mb-5">最新消息</h1>
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        <div class="col" *ngFor="let news of newsAll">
+            <app-news-item [news]="news"></app-news-item>
+        </div>
+    </div>
+    <div class="container mt-5 d-flex justify-content-center" aria-label="...">
+        <app-pager [pageSize]="newsParams.pageSize" [pageNumber]="newsParams.pageNumber"
+            [totalCount]="totalCount" (pageChanged)="onPageChanged($event)"></app-pager>
+    </div>
+    <div class="container d-flex justify-content-center" aria-label="...">
+        <app-paging-info [pageSize]="newsParams.pageSize" [pageNumber]="newsParams.pageNumber"
+            [totalCount]="totalCount"></app-paging-info>
+    </div>
+</div>

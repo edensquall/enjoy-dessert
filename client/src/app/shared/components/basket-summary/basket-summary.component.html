@@ -1,0 +1,38 @@
+<ng-container *ngIf="items.length > 0">
+    <table class="table table-striped basket">
+        <thead>
+            <tr>
+                <th scope="col" class="py-4"></th>
+                <th scope="col" class="py-4">商品</th>
+                <th scope="col" class="py-4 basket-item-price">價格</th>
+                <th scope="col" class="py-4 basket-item-amount">數量</th>
+                <th scope="col" class="py-4 basket-item-subtotal">小計</th>
+                <th *ngIf="isBasket" scope="col" class="py-4"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of items">
+                <td data-th="" class="basket-image"><img src="{{item.imageUrl}}" loading="lazy" width="168" alt=""></td>
+                <td data-th="商品" class="basket-item-name">{{item.productName}}</td>
+                <td data-th="價格" class="basket-item-price">{{item.price | currency:'TWD':'symbol':'1.0'}}</td>
+                <td data-th="數量" class="basket-item-amount">
+                    <div class="basket-item-amount-input input-group mb-3" *ngIf="isBasket">
+                        <button (click)="decrementItemQuantity(item)" class="btn btn-outline-secondary" type="button"><i
+                                class="fa-solid fa-minus"></i></button>
+                        <span class="form-control text-center">{{item.quantity}}</span>
+                        <button (click)="incrementItemQuantity(item)" class="btn btn-outline-secondary" type="button"><i
+                                class="fa-solid fa-plus"></i></button>
+                    </div>
+                    <div *ngIf="isOrder">
+                        {{item.quantity}}
+                    </div>
+                </td>
+                <td data-th="小計" class="basket-item-subtotal">{{item.price * item.quantity |
+                    currency:'TWD':'symbol':'1.0'}}</td>
+                <td data-th="" *ngIf="isBasket" class="pt-0">
+                    <a><i (click)="removeBasketItem(item)" class="fa-solid fa-trash-can cursor-pointer"></i></a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</ng-container>

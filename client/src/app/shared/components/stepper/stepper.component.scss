@@ -1,0 +1,26 @@
+.nav-pills {
+    .nav-link {
+        color: #3d1f00;
+        background: rgba(61, 31, 0, 0.1);
+        border-radius: 0;
+        border: none;
+        font-weight: bold;
+
+        &.active {
+            color: white;
+            background: #ED455D;
+
+            &:hover {
+                color: white;
+            }
+        }
+
+        &:hover {
+            color: #ED455D;
+        }
+
+        &:disabled:not(.active) {
+            color: #333;
+        }
+    }
+}

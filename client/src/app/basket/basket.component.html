@@ -1,0 +1,21 @@
+<div class="section container-xl">
+    <div class="row">
+        <div class="col-12 col-lg-8">
+            <div *ngIf="(basket$ | async) === null">
+                購物籃中沒有商品
+            </div>
+            <app-basket-summary *ngIf="(basket$ | async) as basket" (decrement)="decrementItemQuantity($event)"
+                (increment)="incrementItemQuantity($event)" (remove)="removeBasketItem($event)"
+                [items]="basket.items"></app-basket-summary>
+        </div>
+        <div class="col-12 col-lg-4">
+            <app-order-totals *ngIf="(basketTotals$ | async) as basketTotals" [shippingPrice]="basketTotals.shipping"
+                [subtotal]="basketTotals.subtotal" [total]="basketTotals.total">
+            </app-order-totals>
+            <div *ngIf="(basketTotals$ | async) as basketTotals">
+                <p class="pb-4 remark">*運費會在結帳時選取加入</p>
+                <a routerLink="/checkout" class="btn btn-primary btn-lg w-100">前往結賬</a>
+            </div>
+        </div>
+    </div>
+</div>

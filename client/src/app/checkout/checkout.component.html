@@ -1,0 +1,25 @@
+<div class="section container-xl">
+    <div class="row d-flex flex-column-reverse flex-lg-row">
+        <div class="col-12 col-lg-8 mb-3">
+            <app-stepper [linearModeSelected]="true" #appStepper>
+                <cdk-step [label]="'運送'" [completed]="checkoutForm.get('deliveryForm')?.valid">
+                    <div app-checkout-delivery class="shadow-sm border bg-white" [checkoutForm]="checkoutForm"></div>
+                </cdk-step>
+                <cdk-step [label]="'地址'" [completed]="checkoutForm.get('addressForm')?.valid">
+                    <div app-checkout-address class="shadow-sm border bg-white" [checkoutForm]="checkoutForm"></div>
+                </cdk-step>
+                <cdk-step [label]="'檢視'">
+                    <div app-checkout-review class="shadow-sm border bg-white" [appStepper]="appStepper"></div>
+                </cdk-step>
+                <cdk-step [label]="'付款'" [completed]="checkoutForm.get('paymentForm')?.valid">
+                    <div app-checkout-payment class="shadow-sm border bg-white" [checkoutForm]="checkoutForm"></div>
+                </cdk-step>
+            </app-stepper>
+        </div>
+        <div class="col-12 col-lg-4">
+            <app-order-totals *ngIf="(basketTotals$ | async) as basketTotals" [shippingPrice]="basketTotals.shipping"
+                [subtotal]="basketTotals.subtotal" [total]="basketTotals.total">
+            </app-order-totals>
+        </div>
+    </div>
+</div>

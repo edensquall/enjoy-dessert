@@ -56,6 +56,7 @@ form p {
 
 .table {
   --bs-table-striped-color: #3d1f00;
+  background-color: white;
 }
 
 th {
@@ -86,25 +87,18 @@ td {
 }
 
 .cart-item-amount {
-  width: 140px;
+  min-width: 120px;
 }
 
-.carousel.thumbnail {
-  margin-bottom: 140px;
-}
-
-.carousel.carousel-thumbs-top .carousel-indicators {
-  margin-bottom: -30px;
+.carousel.thumbnail .carousel-indicators {
+  position: static;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 .carousel .carousel-indicators button {
   width: 33% !important;
-}
-
-.carousel-indicators {
-  margin-right: auto;
-  margin-left: auto;
-  margin-bottom: -20px;
+  height: auto;
 }
 
 .card {
@@ -119,6 +113,27 @@ td {
 }
 
 .card a {
+  text-decoration: none;
+}
+
+.member-card {
+  height: 240px;
+}
+
+.member-card-title {
+  color: #ED455D;
+}
+
+.member-card-paragraph {
+  padding-top: 1rem;
+  color: rgba(61, 31, 0, 0.5);
+}
+
+.member-card-paragraph strong {
+  color: #ED455D;
+}
+
+.member-card a {
   text-decoration: none;
 }
 
@@ -153,11 +168,11 @@ svg:hover rect {
   -webkit-transition: opacity 200ms ease;
   transition: opacity 200ms ease;
   color: #fff;
+  --bs-navbar-active-color: #ed455d;
 }
 
 .nav-link:hover {
   color: #ed455d;
-  opacity: 0.8;
 }
 
 .nav-icon {
@@ -178,6 +193,31 @@ svg:hover rect {
 
 .nav-icon.space:hover {
   opacity: 0.8;
+}
+
+.nav-pills .nav-link {
+  color: #3d1f00;
+  background: rgba(61, 31, 0, 0.1);
+  border-radius: 0;
+  border: none;
+  font-weight: bold;
+}
+
+.nav-pills .nav-link.active {
+  color: white;
+  background: #ed455d;
+}
+
+.nav-pills .nav-link.active:hover {
+  color: white;
+}
+
+.nav-pills .nav-link:hover {
+  color: #ed455d;
+}
+
+.nav-pills .nav-link:disabled:not(.active) {
+  color: #333;
 }
 
 .top-navigation {
@@ -251,7 +291,7 @@ svg:hover rect {
   color: rgba(61, 31, 0, 0.5);
 }
 
-.news-detail-text {
+.news-detail-content {
   color: rgba(61, 31, 0, 0.5);
 }
 
@@ -342,6 +382,23 @@ svg:hover rect {
 
 }
 
+.form-check-input:checked {
+  background-color: #ED455D;
+  border-color: #E91635;
+}
+
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.25rem rgb(237, 69, 93, 25%);
+}
+
+.cursor-pointer {
+  cursor: pointer;
+}
+
+.breadcrumb a:hover {
+  text-decoration: none;
+}
+
 @media screen and (max-width: 991px) {
   .section {
     padding: 2rem;
@@ -392,9 +449,6 @@ svg:hover rect {
     margin-bottom: 1.5rem;
   }
 
-  .carousel.thumbnail {
-    margin-bottom: 22vw;
-  }
 }
 
 @media screen and (max-width: 576px) {

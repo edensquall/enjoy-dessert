@@ -1,0 +1,74 @@
+[
+    {
+        "Id": 1,
+        "Title": "藍莓乳酪蛋糕 10/12開賣",
+        "Caption": "以澳洲乳酪為基底，上層鋪滿藍莓果醬，香濃的乳酪搭配充滿果香的藍莓醬。嘗起來除了有澳洲乳酪的細緻濃郁之外，藍莓果醬更增添了此款蛋糕的爽口程度。",
+        "Content": "<p>\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/1/detail/1_1.jpg\">\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/1/detail/1_2.jpg\">\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/1/detail/1_3.jpg\">\r\n</p>",
+        "Thumbnail": "BlueberryCheeseCake_1.jpg",
+        "StartDate": "2022-10-08"
+    },
+    {
+        "Id": 2,
+        "Title": "栗子蒙布朗 08/24開賣",
+        "Caption": "帶著鬆軟、微焦香氣的杏仁奶油塔，搭配嚴選法國頂級栗子醬做出的栗子奶油，接著包裹柑橘庫利砌起一座山再覆上一層層加入法國進口橙酒的栗子慕斯，最後頂端放上鬆軟帶Q的糖漬栗子。",
+        "Content": "<p>\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/2/detail/2_1.jpg\">\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/2/detail/2_2.jpg\">\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/2/detail/2_3.jpg\">\r\n</p>",
+        "Thumbnail": "MontBlancCake_1.jpg",
+        "StartDate": "2022-08-18"
+    },
+    {
+        "Id": 3,
+        "Title": "2022 父親節預購優惠開跑",
+        "Caption": "總是熱熱鬧鬧的過著母親節，嘴上不說的父親其實也期待著屬於他的節日！",
+        "Content": "<p>\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/3/detail/3.jpg\">\r\n</p>",
+        "Thumbnail": "FathersDay.jpg",
+        "StartDate": "2022-07-10"
+    },
+    {
+        "Id": 4,
+        "Title": "經典千層蛋糕 06/28開賣",
+        "Caption": "更升級的精緻展現 26層慢慢堆疊的經典薄餅，餅皮極為細緻，與夾層的鮮奶油幾乎融為一體，添加頂級白蘭地與香甜奶酒，尾韻帶著淡淡的大人風味。",
+        "Content": "<p>\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/4/detail/4_1.jpg\">\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/4/detail/4_2.jpg\">\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/4/detail/4_3.jpg\">\r\n</p>",
+        "Thumbnail": "MilleCrepeCake_1.jpg",
+        "StartDate": "2022-06-23"
+    },
+    {
+        "Id": 5,
+        "Title": "芒果乳酪蛋糕 05/26開賣",
+        "Caption": "季節限定芒果乳酪好迷人，堅持採用當季新鮮的愛文芒果，不使用現成果泥，綿密細緻的口感，滿溢芒果香氣入口即化，香甜不膩口！",
+        "Content": "<p>\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/5/detail/5_1.jpg\">\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/5/detail/5_2.jpg\">\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/5/detail/5_3.jpg\">\r\n</p>",
+        "Thumbnail": "MangoCheeseCake_1.jpg",
+        "StartDate": "2022-05-21"
+    },
+    {
+        "Id": 6,
+        "Title": "2022 母親節預購優惠開跑",
+        "Caption": "母親節即將到來，當然要挑一塊最特別又好吃的母親節蛋糕慰勞辛苦的媽媽！",
+        "Content": "<p>\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/6/detail/6.jpg\">\r\n</p>",
+        "Thumbnail": "MothersDay.jpg",
+        "StartDate": "2022-03-28"
+    },
+    {
+        "Id": 7,
+        "Title": "橘子磅蛋糕 03/15開賣",
+        "Caption": "將薄切的香橙片，鋪在柑橘味濃郁的蛋糕體上，果酸與奶油香氣互相輝映，屬於較為濕潤的口感，也是磅蛋糕裡的人氣口味之一。",
+        "Content": "<p>\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/7/detail/7_1.jpg\">\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/7/detail/7_2.jpg\">\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/7/detail/7_3.jpg\">\r\n</p>",
+        "Thumbnail": "OrangePoundCake_1.jpg",
+        "StartDate": "2022-03-07"
+    },
+    {
+        "Id": 8,
+        "Title": "歌劇院蛋糕 02/11開賣",
+        "Caption": "層次分明的蛋糕，由杏仁海綿蛋糕、法式奶油霜、黑巧克力相間組成，外觀宛如巴黎歌劇院的舞台，因此命名為歌劇院蛋糕。",
+        "Content": "<p>\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/8/detail/8_1.jpg\">\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/8/detail/8_2.jpg\">\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/8/detail/8_3.jpg\">\r\n</p>",
+        "Thumbnail": "OperaCake_1.jpg",
+        "StartDate": "2022-02-08"
+    },
+    {
+        "Id": 9,
+        "Title": "法式草莓塔 01/16開賣",
+        "Caption": "香氣濃郁、味道甜美的草莓，配上香草卡士達醬，形成一道令人難分難捨的美味佳作！雖不比熱戀中的情人甜膩，但卻是風味長存、讓人印象深刻的一道甜點。",
+        "Content": "<p>\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/9/detail/9_1.jpg\">\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/9/detail/9_2.jpg\">\r\n    <img width=\"100%\" style=\"display: block; margin-left: auto; margin-right: auto;\"\r\n        src=\"https://localhost:5001/Content/news/9/detail/9_3.jpg\">\r\n</p>",
+        "Thumbnail": "StrawberryTart_1.jpg",
+        "StartDate": "2022-01-09"
+    }
+]

@@ -1,0 +1,5 @@
+<div *ngIf="(errors$ | async) as errors" class="validation-summary">
+    <ul class="text-danger">
+      <li *ngFor="let error of errors">{{error}}</li>
+    </ul>
+  </div>

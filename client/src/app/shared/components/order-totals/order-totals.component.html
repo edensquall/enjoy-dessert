@@ -1,0 +1,22 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col" class="py-4">訂單摘要</th>
+            <th scope="col" class="py-4"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="py-4">商品小計</td>
+            <td class="text-end">{{subtotal | currency:'TWD':'symbol':'1.0'}}</td>
+        </tr>
+        <tr>
+            <td class="py-4">運費</td>
+            <td class="text-end">{{shippingPrice | currency:'TWD':'symbol':'1.0'}}</td>
+        </tr>
+        <tr>
+            <td class="py-4">應付總額</td>
+            <td class="text-end">{{total | currency:'TWD':'symbol':'1.0'}}</td>
+        </tr>
+    </tbody>
+</table>

@@ -1,0 +1,8 @@
+<div class="section container-xl" *ngIf="(breadcrumb$ | async) as breadcrumbs">
+    <h1 class="mt-0 mb-5">{{breadcrumbs[breadcrumbs.length-1].label}}</h1>
+    <div class="row">
+        <div app-member-menu class="d-flex flex-column col-12 col-sm-4 col-md-3 mb-5"
+            *ngIf="breadcrumbs.length > 0 && breadcrumbs[breadcrumbs.length-1].label.indexOf('訂單 #') === -1"></div>
+        <router-outlet class="d-none"></router-outlet>
+    </div>
+</div>

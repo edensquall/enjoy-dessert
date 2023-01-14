@@ -1,0 +1,9 @@
+<div class="card h-100">
+    <a routerLink="/shop/{{bestseller.id}}">
+        <img src="{{bestseller.thumbnailUrl}}" class="card-img-top" alt="...">
+        <div class="text-decoration-none p-4">
+            <h5 class="card-title">{{bestseller.name}}</h5>
+            <p class="card-text">{{bestseller.price | currency:'TWD':'symbol':'1.0'}}</p>
+        </div>
+    </a>
+</div>

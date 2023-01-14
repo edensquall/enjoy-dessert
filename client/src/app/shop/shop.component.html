@@ -1,0 +1,28 @@
+<div class="section container-xl">
+    <h1 class="mt-0 mb-5">線上訂購</h1>
+    <div class="row">
+        <div class="d-flex flex-column col-12 col-sm-4 col-md-3 mb-5">
+            <ul class="list-group">
+                <li class="aside-item list-group-item list-group-item-action"
+                    *ngFor="let productType of productTypes; let last = last"
+                    [class.active]="productType.id === shopParams.typeId" [value]="productType.id"
+                    (click)="onTypeSelected(productType.id)">{{productType.name}}</li>
+            </ul>
+        </div>
+        <div class="col-12 col-sm-8 col-md-9">
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mx-1">
+                <div class="col" *ngFor="let product of products">
+                    <app-product-item [product]="product"></app-product-item>
+                </div>
+            </div>
+            <div class="container mt-5 d-flex justify-content-center" aria-label="...">
+                <app-pager [pageSize]="shopParams.pageSize" [pageNumber]="shopParams.pageNumber"
+                    [totalCount]="totalCount" (pageChanged)="onPageChanged($event)"></app-pager>
+            </div>
+            <div class="container d-flex justify-content-center" aria-label="...">
+                <app-paging-info [pageSize]="shopParams.pageSize" [pageNumber]="shopParams.pageNumber"
+                    [totalCount]="totalCount"></app-paging-info>
+            </div>
+        </div>
+    </div>
+</div>

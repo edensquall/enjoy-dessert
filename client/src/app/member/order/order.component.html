@@ -1,0 +1,28 @@
+<div class="table-responsive-md">
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">訂單編號</th>
+                <th scope="col">訂購日期</th>
+                <th scope="col">訂單金額</th>
+                <th scope="col">訂單狀態</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let order of orders" routerLink="/member/order/{{order.id}}" class="cursor-pointer">
+                <td>#{{order.id}}</td>
+                <td>{{order.orderDate | date: 'yyyy/MM/dd'}}</td>
+                <td>{{order.total | currency:'TWD':'symbol':'1.0'}}</td>
+                <td>{{order.status}}</td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="container mt-5 d-flex justify-content-center" aria-label="...">
+        <app-pager [pageSize]="orderParams.pageSize" [pageNumber]="orderParams.pageNumber" [totalCount]="totalCount"
+            (pageChanged)="onPageChanged($event)"></app-pager>
+    </div>
+    <div class="container d-flex justify-content-center" aria-label="...">
+        <app-paging-info [pageSize]="orderParams.pageSize" [pageNumber]="orderParams.pageNumber"
+            [totalCount]="totalCount"></app-paging-info>
+    </div>
+</div>
