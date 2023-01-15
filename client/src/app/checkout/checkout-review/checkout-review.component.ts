@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BasketService } from 'src/app/basket/basket.service';
 import { IBasket, IBasketTotals } from 'src/app/shared/models/basket';
+import { HelperService } from 'src/app/shared/services/helper.service';
 
 @Component({
   selector: '[app-checkout-review]',
@@ -14,7 +15,7 @@ export class CheckoutReviewComponent implements OnInit {
   basket$!: Observable<IBasket | null>;
   basketTotals$!: Observable<IBasketTotals | null>;
 
-  constructor(private basketService: BasketService) {}
+  constructor(private basketService: BasketService, private helperService: HelperService) {}
 
   ngOnInit(): void {
     this.basket$ = this.basketService.basket$;
@@ -24,6 +25,7 @@ export class CheckoutReviewComponent implements OnInit {
   createPaymentIntent() {
     return this.basketService.createPaymentIntent().subscribe({
       next: (response: any) => {
+        this.scrollToTop();
         this.appStepper.next();
       },
       error: (error: any) => {
@@ -31,5 +33,9 @@ export class CheckoutReviewComponent implements OnInit {
       },
       complete: () => {},
     });
+  }
+
+  scrollToTop() {
+    this.helperService.scrollToTop();
   }
 }

@@ -3,7 +3,8 @@ import {
   Component,
   ElementRef,
   Input,
-  OnDestroy, ViewChild
+  OnDestroy,
+  ViewChild,
 } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { NavigationExtras, Router } from '@angular/router';
@@ -11,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { lastValueFrom } from 'rxjs';
 import { BasketService } from 'src/app/basket/basket.service';
 import { IBasket } from 'src/app/shared/models/basket';
+import { HelperService } from 'src/app/shared/services/helper.service';
 import { CheckoutService } from '../checkout.service';
 
 declare var Stripe: (arg0: string) => any;
@@ -53,6 +55,7 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
     private basketService: BasketService,
     private checkoutService: CheckoutService,
     private toastr: ToastrService,
+    private helperService: HelperService,
     private router: Router
   ) {}
 
@@ -101,7 +104,7 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
         break;
     }
   }
-  
+
   async submitOrder() {
     this.loading = true;
     const basket = this.basketService.getCurrentBasketValue();
@@ -128,9 +131,9 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
       payment_method: {
         card: this.cardNumber,
         billing_details: {
-          name: this.checkoutForm?.get('paymentForm')?.get('nameOnCard')?.value
-        }
-      }
+          name: this.checkoutForm?.get('paymentForm')?.get('nameOnCard')?.value,
+        },
+      },
     });
   }
 
@@ -147,5 +150,9 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
         ?.get('deliveryMethod')?.value,
       shipToAddress: this.checkoutForm.get('addressForm')?.value,
     };
+  }
+
+  scrollToTop() {
+    this.helperService.scrollToTop();
   }
 }

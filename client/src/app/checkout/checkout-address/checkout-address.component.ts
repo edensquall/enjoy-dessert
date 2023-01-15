@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from 'src/app/account/account.service';
 import { IAddress } from 'src/app/shared/models/address';
+import { HelperService } from 'src/app/shared/services/helper.service';
 
 @Component({
   selector: '[app-checkout-address]',
@@ -14,7 +15,8 @@ export class CheckoutAddressComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private helperService: HelperService
   ) {}
 
   ngOnInit(): void {}
@@ -32,5 +34,9 @@ export class CheckoutAddressComponent implements OnInit {
         },
         complete: () => {},
       });
+  }
+
+  scrollToTop() {
+    this.helperService.scrollToTop();
   }
 }

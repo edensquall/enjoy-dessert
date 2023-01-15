@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { BasketService } from 'src/app/basket/basket.service';
 import { IDeliveryMethod } from 'src/app/shared/models/deliveryMethod';
+import { HelperService } from 'src/app/shared/services/helper.service';
 import { CheckoutService } from '../checkout.service';
 
 @Component({
@@ -15,7 +16,8 @@ export class CheckoutDeliveryComponent implements OnInit {
 
   constructor(
     private checkoutService: CheckoutService,
-    private basketService: BasketService
+    private basketService: BasketService,
+    private helperService: HelperService
   ) {}
 
   ngOnInit(): void {
@@ -36,5 +38,9 @@ export class CheckoutDeliveryComponent implements OnInit {
 
   setShippingPrice(deliveryMethod: IDeliveryMethod) {
     this.basketService.setShippingPrice(deliveryMethod);
+  }
+
+  scrollToTop() {
+    this.helperService.scrollToTop();
   }
 }

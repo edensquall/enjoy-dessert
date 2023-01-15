@@ -15,7 +15,7 @@
         <div class="d-flex justify-content-between flex-row">
             <button routerLink="/basket" class="btn btn-outline-secondary btn-lg me-3"><i class="fa fa-angle-left"></i>
                 回購物車</button>
-            <button class="btn btn-primary btn-lg" [disabled]="checkoutForm.get('deliveryForm')?.invalid"
+            <button class="btn btn-primary btn-lg" [disabled]="checkoutForm.get('deliveryForm')?.invalid" (click)="scrollToTop()"
                 cdkStepperNext>前往地址 <i class="fa fa-angle-right"></i></button>
         </div>
     </div>
