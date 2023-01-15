@@ -3,7 +3,7 @@
         <div class="text-center">
             <i class="fa fa-check-circle fa-5x mb-5" style="color: green;"></i>
             <h2>感謝您！您的訂單已成立！</h2>
-            <h3>訂單編號 #1</h3>
+            <h3 *ngIf="order">訂單編號 #{{order.id}}</h3>
             <p class="mb-5">您的訂單我們已經收到，確認過後就會為您將商品寄送過去，謝謝。</p>
             <button *ngIf="order" routerLink="/member/order/{{order.id}}" class="btn btn-outline-success">檢視您的訂單</button>
             <button *ngIf="!order" routerLink="/member/order" class="btn btn-outline-success">檢視您的所有訂單</button>
