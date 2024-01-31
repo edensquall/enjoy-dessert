@@ -14,21 +14,41 @@ namespace API.Helpers
         {
             config.NewConfig<Product, ProductToReturnDto>()
             .Map(d => d.Type, s => s.ProductType.Name)
-            .Map(d => d.ThumbnailUrl, s => s.ProductImages.Any(x => x.Order == 1)
-                ? $"{MapContext.Current.GetService<IConfiguration>().GetValue<string>("ApiUrl")}product/{s.Id}/{s.ProductImages.Where(x => x.Order == 1).First().Name}"
-                : string.Empty)
-            .Map(d => d.ImageUrls, s => s.ProductImages.Select(x => $"{MapContext.Current.GetService<IConfiguration>().GetValue<string>("ApiUrl")}product/{s.Id}/{x.Name}"));
+            .Map(d => d.ThumbnailUrl, s => s.ProductImages.Count == 0 ? null : s.ProductImages.Any(x => x.Order == 1) ?
+            $"{MapContext.Current.GetService<IConfiguration>().GetValue<string>("ApiUrl")}product/{s.Id}/{s.ProductImages.Where(x => x.Order == 1).First().Name}" : null )
+            .Map(d => d.ImageUrls, s => s.ProductImages.Count == 0 ? null : s.ProductImages.Select(x => string.IsNullOrEmpty(x.Name) ? null : $"{MapContext.Current.GetService<IConfiguration>().GetValue<string>("ApiUrl")}product/{s.Id}/{x.Name}"));
+
+            config.NewConfig<Product, API.Dtos.Admin.ProductToReturnDto>()
+            .Map(d => d.ImageUrls, s => s.ProductImages.OrderBy(x => x.Order).Select(x => $"{MapContext.Current.GetService<IConfiguration>().GetValue<string>("ApiUrl")}product/{s.Id}/{x.Name}"))
+            .Map(d => d.ImageUrlsIndex, s => s.ProductImages.OrderBy(x => x.Order).Select(x => x.Order));
+
 
             config.NewConfig<AppUser, UserDto>()
             .Map(d => d.UserName, s => s.UserName)
             .Map(d => d.DisplayName, s => s.DisplayName)
-            .Map(d => d.Token, s => MapContext.Current.GetService<ITokenService>().CreateToken(s));
+            .Map(d => d.Token, s => MapContext.Current.GetService<ITokenService>().CreateTokenAsync(s).Result);
 
             config.NewConfig<News, NewsDto>()
-            .Map(d => d.ThumbnailUrl, s => $"{MapContext.Current.GetService<IConfiguration>().GetValue<string>("ApiUrl")}news/{s.Id}/{s.Thumbnail}");
+            .Map(d => d.ThumbnailUrl, s => string.IsNullOrEmpty(s.Thumbnail) ? null : $"{MapContext.Current.GetService<IConfiguration>().GetValue<string>("ApiUrl")}news/{s.Id}/{s.Thumbnail}");
+
+            config.NewConfig<News, API.Dtos.Admin.NewsToReturnDto>()
+            .Map(d => d.ThumbnailUrl, s => string.IsNullOrEmpty(s.Thumbnail) ? null : $"{MapContext.Current.GetService<IConfiguration>().GetValue<string>("ApiUrl")}news/{s.Id}/{s.Thumbnail}");
+
+            config.NewConfig<API.Dtos.Admin.NewsDto, News>()
+            .IgnoreIf((s, d) => string.IsNullOrEmpty(s.Thumbnail), d => d.Thumbnail);
 
             config.NewConfig<Slide, SlideDto>()
             .Map(d => d.ImageUrl, s => $"{MapContext.Current.GetService<IConfiguration>().GetValue<string>("ApiUrl")}slide/{s.Image}");
+
+            config.NewConfig<Order, API.Dtos.Admin.OrderToReturnDto>()
+            .Map(d => d.DeliveryMethod, s => s.DeliveryMethod.ShortName)
+            .Map(d => d.ShippingPrice, s => s.DeliveryMethod.Price)
+            .Map(d => d.Status, s => s.Status);
+
+            config.NewConfig<OrderItem, API.Dtos.Admin.OrderItemDto>()
+            .Map(d => d.ProductId, s => s.ItemOrdered.ProductItemId)
+            .Map(d => d.ProductName, s => s.ItemOrdered.ProductName)
+            .Map(d => d.ImageUrl, s => s.ItemOrdered.ImageUrl);
 
             config.NewConfig<Order, OrderToReturnDto>()
             .Map(d => d.DeliveryMethod, s => s.DeliveryMethod.ShortName)

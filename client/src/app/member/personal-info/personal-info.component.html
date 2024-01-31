@@ -1,7 +1,7 @@
 <div class="row row-cols-1 row-cols-md-2 row-cols-lg-2 g-4 mx-1">
     <div class="col">
         <div class="shadow-sm border bg-white">
-            <form [formGroup]="basicInfoForm" (ngSubmit)="onBasicInfoSubmit()">
+            <form [formGroup]="basicInfoForm" (ngSubmit)="onBasicInfoSubmit()" class="p-3 p-md-4 p-lg-5">
                 <h2 class="text-center mt-0 mb-5">個人基本資料</h2>
                 <app-text-input formControlName="displayName" [label]="'顯示名稱'"></app-text-input>
                 <app-text-input formControlName="phoneNumber" [label]="'電話號碼'" [type]="'tel'"></app-text-input>
@@ -13,7 +13,7 @@
     </div>
     <div class="col">
         <div class="shadow-sm border bg-white">
-            <form [formGroup]="newPasswordForm" (ngSubmit)="onNewPasswordSubmit()">
+            <form [formGroup]="newPasswordForm" (ngSubmit)="onNewPasswordSubmit()" class="p-3 p-md-4 p-lg-5">
                 <h2 class="text-center mt-0 mb-5">修改密碼</h2>
                 <app-text-input formControlName="password" [label]="'當前密碼'" [type]="'password'"></app-text-input>
                 <app-text-input formControlName="newPassword" [label]="'新密碼'" [type]="'password'"></app-text-input>

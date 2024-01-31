@@ -30,8 +30,8 @@ namespace Infrastructure.Services
             var items = new List<OrderItem>();
             foreach (var item in basket.Items)
             {
-                var productsWithTypesAndImagesSpec = new ProductsWithTypesAndImagesSpecification(item.Id);
-                var productItem = await _unitOfWork.Repository<Product>().GetEntityWithSpec(productsWithTypesAndImagesSpec);
+                var productByIdSpec = new ProductByIdSpecification(item.Id);
+                var productItem = await _unitOfWork.Repository<Product>().GetEntityWithSpec(productByIdSpec);
                 var productItemImageUrl = $"{_config["ApiUrl"]}product/{productItem.Id}/{productItem.ProductImages.Where(x => x.Order == 1).FirstOrDefault()?.Name}" ?? string.Empty;
                 var itemOrdered = new ProductItemOrdered(productItem.Id, productItem.Name, productItemImageUrl);
                 var orderItem = new OrderItem(itemOrdered, productItem.Price, item.Quantity);
@@ -74,7 +74,7 @@ namespace Infrastructure.Services
 
         public async Task<Order> GetOrderByIdAsync(int id, string buyerUserName)
         {
-            var spec = new OrdersWithItemsAndOrderingSpecification(id, buyerUserName);
+            var spec = new OrderByIdSpecification(id, buyerUserName);
 
             return await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
         }
@@ -87,7 +87,7 @@ namespace Infrastructure.Services
         }
         public async Task<IReadOnlyList<Order>> GetOrderForUserAsync(string buyerUserName, OrderSpecParams orderParams)
         {
-            var spec = new OrdersWithItemsAndOrderingSpecification(buyerUserName, orderParams);
+            var spec = new OrderByBuyerUserNameSpecification(buyerUserName, orderParams);
 
             return await _unitOfWork.Repository<Order>().ListAsync(spec);
         }

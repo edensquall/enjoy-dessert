@@ -26,9 +26,9 @@ namespace API.Controllers
         public async Task<ActionResult<Pagination<ProductToReturnDto>>> GetProducts(
             [FromQuery] ProductSpecParams productParams)
         {
-            var spec = new ProductsWithTypesAndImagesSpecification(productParams);
+            var spec = new ProductWithFiltersAndAllowShowingSpecificication(productParams);
 
-            var countSpec = new ProductWithFiltersForCountSpecificication(productParams);
+            var countSpec = new ProductWithFiltersAndAllowShowingForCountSpecificication(productParams);
 
 
             var totalItems = await _unitOfWork.Repository<Product>().CountAsync(countSpec);
@@ -44,7 +44,7 @@ namespace API.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<ProductToReturnDto>> GetProduct(int id)
         {
-            var spec = new ProductsWithTypesAndImagesSpecification(id);
+            var spec = new ProductByIdAndAllowShowingSpecification(id);
 
             var product = await _unitOfWork.Repository<Product>().GetEntityWithSpec(spec);
 
@@ -64,7 +64,7 @@ namespace API.Controllers
         [HttpGet("bestseller")]
         public async Task<ActionResult<IReadOnlyList<ProductToReturnDto>>> GetBestseller()
         {
-            var spec = new ProductsIsBestsellerWithTypesAndImagesSpecification();
+            var spec = new ProductIsBestsellerAndAllowShowingSpecification();
 
             var products = await _unitOfWork.Repository<Product>().ListAsync(spec);
 

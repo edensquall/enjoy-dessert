@@ -3,17 +3,19 @@
         <div class="col-12 col-lg-6">
             <div id="carouselIndicators" class="carousel slide carousel-fade thumbnail">
                 <div class="carousel-inner">
-                    <ng-container *ngFor="let imageUrl of product.imageUrls; let i = index">
+                    <ng-container *ngFor="let _ of [].constructor(3); let i = index">
                         <div class="carousel-item" [ngClass]="{'active': i === 0}">
-                            <img src="{{imageUrl}}" class="d-block w-100" alt="...">
+                            <img [src]="(product && product.imageUrls && product.imageUrls.length > i) ? product.imageUrls[i] : '/assets/images/Image.jpg'"
+                            class="d-block w-100" alt="...">
                         </div>
                     </ng-container>
                 </div>
                 <div class="carousel-indicators">
-                    <ng-container *ngFor="let imageUrl of product.imageUrls; let i = index">
+                    <ng-container 
+                    *ngFor="let _ of [].constructor(3); let i = index">
                         <button type="button" data-bs-target="#carouselIndicators" [attr.data-bs-slide-to]="i"
                             [ngClass]="{'active': i === 0}" [attr.aria-current]="i === 0 ? 'true' : null" [attr.aria-label]="'Slide'+ i+1">
-                            <img class="d-block w-100" src="{{imageUrl}}" />
+                            <img class="d-block w-100" [src]="(product && product.imageUrls && product.imageUrls.length > i) ? product.imageUrls[i] : '/assets/images/Image.jpg'" />
                         </button>
                     </ng-container>
                 </div>

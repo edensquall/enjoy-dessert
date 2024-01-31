@@ -14,9 +14,9 @@ using Microsoft.Extensions.FileProviders;
 using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
- AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
- AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
- 
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+AppContext.SetSwitch("Npgsql.DisableDateTimeInfinityConversions", true);
+
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddDbContext<StoreContext>(x => x.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));

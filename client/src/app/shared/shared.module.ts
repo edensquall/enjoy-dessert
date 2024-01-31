@@ -11,6 +11,8 @@ import { StepperComponent } from './components/stepper/stepper.component';
 import { BasketSummaryComponent } from './components/basket-summary/basket-summary.component';
 import { ValidationSummaryComponent } from './components/validation-summary/validation-summary.component';
 import { SafeHtmlPipe } from './pipes/safe-html.pipe';
+import { SelectOptionComponent } from './components/select-option/select-option.component';
+import { TextAreaComponent } from './components/text-area/text-area.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,8 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
     PagerComponent,
     OrderTotalsComponent,
     TextInputComponent,
+    SelectOptionComponent,
+    TextAreaComponent,
     StepperComponent,
     BasketSummaryComponent,
     ValidationSummaryComponent,
@@ -38,6 +42,8 @@ import { SafeHtmlPipe } from './pipes/safe-html.pipe';
     ReactiveFormsModule,
     FormsModule,
     TextInputComponent,
+    SelectOptionComponent,
+    TextAreaComponent,
     CdkStepperModule,
     StepperComponent,
     BasketSummaryComponent,

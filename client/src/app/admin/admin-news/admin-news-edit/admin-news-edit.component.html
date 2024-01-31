@@ -1,0 +1,44 @@
+<div class="section container">
+    <h1 class="mt-0 mb-5">{{functionText}}最新消息</h1>
+    <div class="shadow-sm border bg-white">
+        <form [formGroup]="editAdminNewsForm" (ngSubmit)="onAdminNewsSubmit()" class="p-3 p-md-4 p-lg-5">
+            <div class="row ml-5">
+                <div class="col-12 col-lg-6 d-flex flex-column">
+                    <app-text-input formControlName="title" [label]="'標題'"></app-text-input>
+                    <app-text-area formControlName="caption" class="d-flex flex-column flex-grow-1"
+                        [label]="'說明'"></app-text-area>
+                </div>
+                <div class="col-12 col-lg-6">
+                    <div class="mb-3">
+                        <input class="form-control text-field" type="file" (change)="onFileChange($event)">
+                    </div>
+                    <div class="mb-5"><img [src]="(adminNews && adminNews?.thumbnailUrl) ? adminNews.thumbnailUrl : '/assets/images/Image.jpg'"
+                            width="100%" alt=""></div>
+                </div>
+                <div class="col-12 mb-5">
+                    <editor [init]="tinyInit" formControlName="content"></editor>
+                </div>
+                <div class="col-12 col-sm-6 mb-3">
+                    <input class="form-check-input" type="checkbox" value="" id="isEnable" formControlName="isShow">
+                    <label class="form-check-label" for="isEnable">是否顯示</label>
+                </div>
+                <div class="col-12 col-sm-6 mb-3">
+                    <input class="form-check-input" type="checkbox" value="" id="isEnableByDate"
+                        formControlName="isShowByDate">
+                    <label class="form-check-label" for="isEnableByDate">按日期顯示</label>
+                </div>
+                <div class="col-12 col-sm-6 mb-3">
+                    <app-text-input formControlName="startDate" [type]="'date'" [label]="'起始日期'"></app-text-input>
+                </div>
+                <div class="col-12 col-sm-6 mb-3">
+                    <app-text-input formControlName="endDate" [type]="'date'" [label]="'結束日期'"></app-text-input>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end flex-row">
+                <a routerLink="/admin/news" class="btn btn-outline-secondary btn-lg me-3">返回</a>
+                <button type="submit" [disabled]="editAdminNewsForm.invalid" class="btn btn-primary btn-lg">{{
+                    functionText }}</button>
+            </div>
+        </form>
+    </div>
+</div>

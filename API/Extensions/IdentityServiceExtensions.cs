@@ -26,6 +26,7 @@ namespace API.Extensions
             builder.AddEntityFrameworkStores<AppIdentityDbContext>();
             builder.AddSignInManager<SignInManager<AppUser>>();
             builder.AddRoleManager<RoleManager<AppRole>>();
+            builder.AddDefaultTokenProviders();
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>

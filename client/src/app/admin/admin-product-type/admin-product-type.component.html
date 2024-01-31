@@ -1,0 +1,43 @@
+<div class="section container">
+    <div class="d-flex justify-content-between align-items-center mb-5">
+        <h1 class="mt-0">產品類別</h1>
+        <button class="btn btn-primary btn-lg" (click)="openModal(template, {id: 0, name: ''})">新增</button>
+    </div>
+    <div class="table-responsive-md">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">編號</th>
+                    <th scope="col">名稱</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let productType of productTypes;">
+                    <td class="cursor-pointer" (click)="openModal(template, productType)">{{productType.id}}</td>
+                    <td class="cursor-pointer" (click)="openModal(template, productType)">{{productType.name}}</td>
+                    <td>
+                        <a (click)="deleteProductType(productType.id)"><img src="/assets/images/close.svg" loading="lazy" alt=""></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <!-- Modal -->
+    <ng-template #template>
+        <form [formGroup]="editProductTypeForm" (ngSubmit)="onProductTypeSubmit()">
+            <div class="modal-header border-bottom-0">
+                <h2 class="modal-title" id="exampleModalLabel">{{functionText}}產品類別</h2>
+                <button type="button" class="btn-close" aria-label="Close" (click)="modalRef?.hide()">
+                    <span aria-hidden="true" class="visually-hidden">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-text-input formControlName="name" [label]="'名稱'"></app-text-input>
+            </div>
+            <div class="modal-footer border-top-0">
+                <button type="button" class="btn btn-outline-secondary btn-lg" (click)="modalRef?.hide()">關閉</button>
+                <button [disabled]="editProductTypeForm.invalid" type="submit" class="btn btn-primary btn-lg">{{functionText}}</button>
+            </div>
+        </form>
+    </ng-template>
+</div>

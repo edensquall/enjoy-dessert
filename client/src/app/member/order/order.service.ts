@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map } from 'rxjs';
 import { IOrder } from 'src/app/shared/models/order';
-import { OrderParams } from 'src/app/shared/models/OrderParams';
+import { OrderParams } from 'src/app/shared/models/orderParams';
 import { IPagination } from 'src/app/shared/models/pagination';
 import { environment } from 'src/environments/environment';
 

@@ -17,6 +17,6 @@ namespace Core.Entities
         public DateTime? EndDate { get; set; }
         public ProductType? ProductType { get; set; }
         public int? ProductTypeId { get; set; }
-        public IReadOnlyList<ProductImage>? ProductImages { get; set; }
+        public List<ProductImage>? ProductImages { get; set; } = new List<ProductImage>();
     }
 }

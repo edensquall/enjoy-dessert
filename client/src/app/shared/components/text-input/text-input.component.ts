@@ -1,3 +1,4 @@
+import { formatDate } from '@angular/common';
 import {
   Component,
   ElementRef,
@@ -47,7 +48,15 @@ export class TextInputComponent implements OnInit, ControlValueAccessor {
   onTouched() {}
 
   writeValue(obj: any): void {
-    this.input.nativeElement.value = obj || '';
+    if (this.type === 'date') {
+      if (obj) {
+        this.input.nativeElement.value = formatDate(obj, 'yyyy-MM-dd', 'en');
+      } else {
+        this.input.nativeElement.value = '';
+      }
+    } else {
+      this.input.nativeElement.value = obj || '';
+    }
   }
 
   registerOnChange(fn: any): void {

@@ -1,0 +1,64 @@
+.navbar {
+    --bs-navbar-nav-link-padding-x: 1rem;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    flex-wrap: inherit;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  .nav-link {
+    padding: 0.75rem 1rem;
+    -webkit-transition: opacity 200ms ease;
+    transition: opacity 200ms ease;
+    color: #fff;
+    --bs-navbar-active-color: #ed455d;
+  
+    &:hover {
+      color: #ed455d;
+    }
+  }
+  
+  .nav-icon {
+    padding: 0.5rem;
+    -webkit-transition: opacity 200ms ease;
+    transition: opacity 200ms ease;
+    color: #fff;
+  
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  
+  .nav-icon.space {
+    margin-left: 1rem;
+    -webkit-transition: opacity 200ms ease;
+    transition: opacity 200ms ease;
+  
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  
+  .top-navigation {
+    background-color: #fb0;
+    z-index: 10;
+    box-shadow: 0 4px 4px 0 rgba(61, 31, 0, 0.1);
+  }
+  
+  .basket-no {
+    position: absolute;
+    min-height: 25px;
+    min-width: 25px;
+    border-radius: 50%;
+    font-size: 1rem;
+    background: #ed455d;
+    color: white;
+    text-align: center;
+    top: -0.5rem;
+    right: -0.5rem;
+  }
+  
+  .offcanvas {
+    background-color: #fb0;
+  }

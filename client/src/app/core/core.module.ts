@@ -10,6 +10,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { SectionHeaderComponent } from './section-header/section-header.component';
 import { ServerErrorComponent } from './server-error/server-error.component';
 import { TestErrorComponent } from './test-error/test-error.component';
+import { AdminNavBarComponent } from './admin-nav-bar/admin-nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,8 @@ import { TestErrorComponent } from './test-error/test-error.component';
     NotFoundComponent,
     ServerErrorComponent,
     SectionHeaderComponent,
+    AdminNavBarComponent,
+    AdminNavBarComponent
   ],
   imports: [
     CommonModule,
@@ -36,6 +39,7 @@ import { TestErrorComponent } from './test-error/test-error.component';
     NotFoundComponent,
     ServerErrorComponent,
     SectionHeaderComponent,
+    AdminNavBarComponent
   ],
 })
 export class CoreModule {}

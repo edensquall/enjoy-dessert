@@ -1,0 +1,26 @@
+<header class="navbar navbar-expand-md top-navigation">
+    <nav class="container-xl">
+      <a routerLink="/" class="navbar-brand"><img src="/assets/images/enjoy_logo.svg" loading="lazy" alt=""></a>
+      <div class="navbar-nav ms-auto align-items-center">
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="navbarSupportedContent"
+          aria-labelledby="navbarSupportedContentLabel">
+          <div class="offcanvas-header">
+            <img src="/assets/images/enjoy_logo.svg" loading="lazy" alt="">
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <a routerLink="/admin/news" routerLinkActive="active" class="nav-link" (click)="onLinkClick()">最新消息</a>
+            <a routerLink="/admin/product" routerLinkActive="active" class="nav-link" (click)="onLinkClick()">產品</a>
+            <a routerLink="/admin/producttype" routerLinkActive="active" class="nav-link" (click)="onLinkClick()">產品類別</a>
+            <a routerLink="/admin/order" routerLinkActive="active" class="nav-link" (click)="onLinkClick()">訂單管理</a>
+            <a routerLink="/admin/account" routerLinkActive="active" class="nav-link" (click)="onLinkClick()">會員管理</a>
+          </div>
+        </div>
+      </div>
+      <button type="button" class="navbar-toggler" data-bs-toggle="offcanvas" data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </nav>
+  </header>
+  <app-section-header></app-section-header>

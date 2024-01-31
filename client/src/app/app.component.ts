@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { BasketService } from './basket/basket.service';
 import { AccountService } from './account/account.service';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Observable, map } from 'rxjs';
 
 @Component({
   selector: '[app-root]',
@@ -9,15 +11,26 @@ import { AccountService } from './account/account.service';
 })
 export class AppComponent implements OnInit {
   title = 'Welcome to Enjoy Dessert';
+  isBackstage!: boolean;
 
   constructor(
     private basketService: BasketService,
-    private accountService: AccountService
+    private accountService: AccountService,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
     this.loadBasket();
     this.loadCurrentUser();
+    this.checkIsBackstage();
+  }
+
+  checkIsBackstage() {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationEnd) {
+        this.isBackstage = event.url.indexOf('admin') > -1;
+      }
+    });
   }
 
   loadCurrentUser() {

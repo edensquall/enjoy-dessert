@@ -7,6 +7,17 @@ namespace Core.Entities
 {
     public class ProductImage:BaseEntity
     {
+        public ProductImage()
+        {
+
+        }
+
+        public ProductImage(string name, int order)
+        {
+            Name = name;
+            Order = order;
+        }
+
         public string? Name { get; set; }
         public int Order { get; set; }
         public Product? Product { get; set; }

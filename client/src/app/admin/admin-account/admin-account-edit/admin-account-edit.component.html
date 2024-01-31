@@ -1,0 +1,41 @@
+<div class="section container">
+    <h1 class="mt-0 mb-5">{{functionText}}會員</h1>
+    <div class="shadow-sm border bg-white">
+        <form [formGroup]="editAdminAccountForm" (ngSubmit)="onAdminAccountSubmit()" class="p-3 p-md-4 p-lg-5">
+            <div class="row ml-5">
+                <div class="col-12 col-sm-6 mb-3">
+                    <app-text-input formControlName="userName" [label]="'使用者名稱'"></app-text-input>
+                </div>
+                <div class="col-12 col-sm-6 mb-3">
+                    <app-text-input formControlName="displayName" [label]="'顯示名稱'"></app-text-input>
+                </div>
+                <div class="col-12 col-sm-6 mb-3">
+                    <app-text-input formControlName="password" [label]="'密碼'" [type]="'password'"></app-text-input>
+                </div>
+                <div class="col-12 col-sm-6 mb-3">
+                    <app-text-input formControlName="passwordConfirm" [label]="'密碼確認'"
+                        [type]="'password'"></app-text-input>
+                </div>
+                <div class="col-12 col-sm-6 mb-3">
+                    <app-text-input formControlName="phoneNumber" [label]="'電話號碼'"></app-text-input>
+                </div>
+                <div class="col-12 col-sm-6 mb-3">
+                    <app-text-input formControlName="email" [label]="'Email'"></app-text-input>
+                </div>
+                <div class="col-12 col-sm-6 mb-3">
+                    <app-select-option formControlName="grade" [label]="'會員等級'"
+                        [options]="gradeType"></app-select-option>
+                </div>
+                <div class="col-12 col-sm-6 mb-3">
+                    <input class="form-check-input" type="checkbox" value="" id="isAdmin" formControlName="isAdmin">
+                    <label class="form-check-label" for="isAdmin">是否為管理員</label>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end flex-row">
+                <a routerLink="/admin/account" class="btn btn-outline-secondary btn-lg me-3">返回</a>
+                <button type="submit" [disabled]="editAdminAccountForm.invalid"
+                    class="btn btn-primary btn-lg">{{functionText}}</button>
+            </div>
+        </form>
+    </div>
+</div>

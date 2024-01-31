@@ -1,0 +1,11 @@
+<div class="form-label-group mb-4">
+    <select [ngClass]="(controlDir && controlDir.control && controlDir.control.touched) ? 
+    !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null" [ngModel]="selectedValue" (change)="onChange($any($event).target.value)" 
+        (blur)="onTouched()" class="form-select form-control text-field" aria-label="Default select example">
+        <option *ngFor="let option of options;" value="{{option.id}}">
+            {{option.name}}</option>
+    </select>
+    <div class="invalid-feedback" *ngIf="(controlDir && controlDir.control && 
+    !controlDir.control.valid && controlDir.control.touched)">
+        <span *ngIf="controlDir.control.errors?.['required']">{{label}} 為必填</span>
+    </div>

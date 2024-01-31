@@ -2,6 +2,7 @@ using API.Dtos;
 using API.Errors;
 using API.Helpers;
 using Core.Entities;
+using Core.Entities.OrderAggregate;
 using Core.Interfaces;
 using Core.Specifications;
 using MapsterMapper;
@@ -23,11 +24,11 @@ namespace API.Controllers
 
         [HttpGet]
         public async Task<ActionResult<IReadOnlyList<NewsDto>>> GetNewsAll(
-            [FromQuery] NewsSpecParams NewsParams)
+            [FromQuery] NewsSpecParams newsParams)
         {
-            var spec = new NewsAllowShowSpecification(NewsParams);
+            var spec = new NewsAllowShowingSpecification(newsParams);
 
-            var countSpec = new NewsWithFiltersForCountSpecificication(NewsParams);
+            var countSpec = new NewsAllowShowingSpecification();
 
             var totalItems = await _unitOfWork.Repository<News>().CountAsync(countSpec);
 
@@ -35,19 +36,19 @@ namespace API.Controllers
 
             var data = _mapper.Map<IReadOnlyList<NewsDto>>(news);
 
-            return Ok(new Pagination<NewsDto>(NewsParams.PageIndex, NewsParams.PageSize, totalItems, data));
+            return Ok(new Pagination<NewsDto>(newsParams.PageIndex, newsParams.PageSize, totalItems, data));
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<NewsDto>> GetNews(int id)
+        public async Task<ActionResult<OrderDto>> GetNews(int id)
         {
-            var spec = new NewsAllowShowSpecification(id);
+            var spec = new OrderByIdSpecification(id);
 
-            var news = await _unitOfWork.Repository<News>().GetEntityWithSpec(spec);
+            var order = await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
 
-            if (news == null) return NotFound(new ApiResponse(404));
+            if (order == null) return NotFound(new ApiResponse(404));
 
-            return Ok(_mapper.Map<NewsDto>(news));
+            return Ok(_mapper.Map<OrderDto>(order));
         }
     }
 }

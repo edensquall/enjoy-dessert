@@ -1,0 +1,33 @@
+<div class="section container">
+    <h1 class="mt-0 mb-5">訂單管理</h1>
+    <div class="table-responsive-md">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">編號</th>
+                    <th scope="col">訂購者</th>
+                    <th class="text-center" scope="col">訂購日期</th>
+                    <th class="text-end" scope="col">訂單金額</th>
+                    <th class="text-center" scope="col">訂單狀態</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="cursor-pointer" routerLink="/admin/order/{{order.id}}" *ngFor="let order of orders">
+                    <td >{{order.id}}</td>
+                    <td >{{order.buyerUserName}}</td>
+                    <td class="text-center" >{{order.orderDate | date: 'yyyy/MM/dd'}}</td>
+                    <td class="text-end" >{{order.total | currency:'TWD':'symbol':'1.0'}}</td>
+                    <td class="text-center" >{{OrderStatus[order.status]}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container mt-5 d-flex justify-content-center" aria-label="...">
+        <app-pager [pageSize]="orderParams.pageSize" [pageNumber]="orderParams.pageNumber" [totalCount]="totalCount"
+            (pageChanged)="onPageChanged($event)"></app-pager>
+    </div>
+    <div class="container d-flex justify-content-center" aria-label="...">
+        <app-paging-info [pageSize]="orderParams.pageSize" [pageNumber]="orderParams.pageNumber"
+            [totalCount]="totalCount"></app-paging-info>
+    </div>
+</div>

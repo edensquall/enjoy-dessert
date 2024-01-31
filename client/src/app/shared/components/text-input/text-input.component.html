@@ -1,4 +1,4 @@
-<div class="form-label-group mb-3 mb-sm-5">
+<div class="form-label-group mb-4">
     <input [ngClass]="(controlDir && controlDir.control && controlDir.control.touched) ? 
         !controlDir.control.valid ? 'is-invalid' : 'is-valid' : null" [type]="type"
         (input)="onChange($any($event).target.value)" (blur)="onTouched()" id="{{label}}" #input

@@ -4,7 +4,7 @@ import { of } from 'rxjs';
 export function PasswordValidator(): ValidatorFn {
   return (control) => {
     if (!control.value) {
-      return of(null);
+      return null;
     }
 
     const PASSWORD_REGEXP = new RegExp('(?=^.{6,}$)(?=.*[a-z])(?!.*\\s).*$');

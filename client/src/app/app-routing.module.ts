@@ -71,6 +71,13 @@ const routes: Routes = [
       import('./member/member.module').then((mod) => mod.MemberModule),
     data: { breadcrumb: '會員' },
   },
+  {
+    path: 'admin',
+    canActivate: [AuthGuard],
+    loadChildren: () =>
+      import('./admin/admin.module').then((mod) => mod.AdminModule),
+    data: { breadcrumb: { skip: true } },
+  },
   { path: '**', redirectTo: 'not-found', pathMatch: 'full' },
 ];
 

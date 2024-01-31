@@ -34,8 +34,15 @@ a:hover {
   color: #E91635;
 }
 
+input[type="file"] {
+  height: 3.125rem;
+}
+
+input[type="file"]::-webkit-file-upload-button {
+  height: 3.125rem;
+}
+
 form {
-  padding: 10%;
   background-color: white;
 }
 
@@ -60,6 +67,7 @@ form p {
 }
 
 th {
+  --bs-table-bg: rgba(61, 31, 0, 0.1);
   color: #3d1f00;
 }
 
@@ -324,12 +332,11 @@ svg:hover rect {
 }
 
 .text-field {
-  height: 56px;
+  min-height: 3.125rem;
   margin-bottom: 3rem;
   border-style: solid;
   border-width: 1px;
   border-color: rgba(61, 31, 0, 0.5);
-  border-radius: 4px;
 }
 
 .footer {

@@ -2,7 +2,8 @@
     <h3>讀取中...</h3>
 </ngx-spinner>
 
-<app-nav-bar class="sticky-top"></app-nav-bar>
+<app-admin-nav-bar *ngIf="isBackstage" class="sticky-top"></app-admin-nav-bar>
+<app-nav-bar *ngIf="!isBackstage" class="sticky-top"></app-nav-bar>
 <div class="flex-grow-1">
     <router-outlet class="d-none"></router-outlet>
 </div>

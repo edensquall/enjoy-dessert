@@ -8,6 +8,8 @@ namespace API.Extensions
         {
             services.AddSwaggerGen(c =>
             {
+                //使用物件全名建立id
+                c.CustomSchemaIds(x => x.FullName);
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "EnjoyDessert API", Version = "v1" });
 
                 var securitySchema = new OpenApiSecurityScheme
@@ -25,7 +27,7 @@ namespace API.Extensions
                 };
 
                 c.AddSecurityDefinition("Bearer", securitySchema);
-                var securityRequirement = new OpenApiSecurityRequirement {{securitySchema, new [] {"Bearer"}}};
+                var securityRequirement = new OpenApiSecurityRequirement { { securitySchema, new[] { "Bearer" } } };
                 c.AddSecurityRequirement(securityRequirement);
             });
             return services;

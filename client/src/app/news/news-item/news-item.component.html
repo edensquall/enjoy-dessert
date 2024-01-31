@@ -1,6 +1,6 @@
 <div class="card h-100 news">
     <a routerLink= "/news/{{news.id}}">
-      <img src="{{news.thumbnailUrl}}" class="card-img-top" alt="...">
+      <img [src]="(news && news?.thumbnailUrl) ? news.thumbnailUrl : '/assets/images/Image.jpg'" class="card-img-top" alt="...">
       <div class="text-decoration-none p-4">
         <h5 class="card-title">{{news.title}}</h5>
         <p class="card-text">{{news.caption}}</p>
