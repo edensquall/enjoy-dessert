@@ -19,13 +19,7 @@ namespace Infrastructure.Data
                     var productTypesData = File.ReadAllText(path + @"/Data/SeedData/productTypes.json");
 
                     var productTypes = JsonSerializer.Deserialize<List<ProductType>>(productTypesData);
-
-                    foreach (var item in productTypes)
-                    {
-                        context.ProductTypes.Add(item);
-                    }
-
-                    await context.SaveChangesAsync();
+                    context.AddRange(productTypes);
                 }
 
                 if (!context.Products.Any())
@@ -33,13 +27,7 @@ namespace Infrastructure.Data
                     var productsData = File.ReadAllText(path + @"/Data/SeedData/products.json");
 
                     var products = JsonSerializer.Deserialize<List<Product>>(productsData);
-
-                    foreach (var item in products)
-                    {
-                        context.Products.Add(item);
-                    }
-
-                    await context.SaveChangesAsync();
+                    context.AddRange(products);
                 }
 
                 if (!context.ProductImages.Any())
@@ -47,13 +35,7 @@ namespace Infrastructure.Data
                     var productImagesData = File.ReadAllText(path + @"/Data/SeedData/productImages.json");
 
                     var productImages = JsonSerializer.Deserialize<List<ProductImage>>(productImagesData);
-
-                    foreach (var item in productImages)
-                    {
-                        context.ProductImages.Add(item);
-                    }
-
-                    await context.SaveChangesAsync();
+                    context.AddRange(productImages);
                 }
 
                 if (!context.News.Any())
@@ -61,13 +43,7 @@ namespace Infrastructure.Data
                     var newsData = File.ReadAllText(path + @"/Data/SeedData/news.json");
 
                     var news = JsonSerializer.Deserialize<List<News>>(newsData);
-
-                    foreach (var item in news)
-                    {
-                        context.News.Add(item);
-                    }
-
-                    await context.SaveChangesAsync();
+                    context.AddRange(news);
                 }
 
                 if (!context.Slides.Any())
@@ -75,25 +51,18 @@ namespace Infrastructure.Data
                     var slidesData = File.ReadAllText(path + @"/Data/SeedData/slides.json");
 
                     var slides = JsonSerializer.Deserialize<List<Slide>>(slidesData);
-
-                    foreach (var item in slides)
-                    {
-                        context.Slides.Add(item);
-                    }
-
-                    await context.SaveChangesAsync();
+                    context.AddRange(slides);
                 }
                 if (!context.DeliveryMethods.Any())
                 {
                     var dmData = File.ReadAllText(path + @"/Data/SeedData/delivery.json");
 
                     var methods = JsonSerializer.Deserialize<List<DeliveryMethod>>(dmData);
+                    context.AddRange(methods);
+                }
 
-                    foreach (var item in methods)
-                    {
-                        context.DeliveryMethods.Add(item);
-                    }
-
+                if (context.ChangeTracker.HasChanges())
+                {
                     await context.SaveChangesAsync();
                 }
             }
