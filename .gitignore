@@ -1,7 +1,6 @@
 obj
 bin
 appsettings.json
-settings.json
 *.db
 *.rdb
 .DS_Store
