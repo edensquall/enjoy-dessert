@@ -40,15 +40,15 @@ namespace API.Controllers
         }
 
         [HttpGet("{id}")]
-        public async Task<ActionResult<OrderDto>> GetNews(int id)
+        public async Task<ActionResult<NewsDto>> GetNews(int id)
         {
-            var spec = new OrderByIdSpecification(id);
+            var spec = new NewsAllowShowingSpecification(id);
 
-            var order = await _unitOfWork.Repository<Order>().GetEntityWithSpec(spec);
+            var news = await _unitOfWork.Repository<News>().GetEntityWithSpec(spec);
 
-            if (order == null) return NotFound(new ApiResponse(404));
+            if (news == null) return NotFound(new ApiResponse(404));
 
-            return Ok(_mapper.Map<OrderDto>(order));
+            return Ok(_mapper.Map<NewsDto>(news));
         }
     }
 }
