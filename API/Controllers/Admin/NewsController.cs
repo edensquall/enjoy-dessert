@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using API.Dtos.Admin;
 using API.Errors;
 using API.Helpers;
@@ -9,7 +5,6 @@ using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
 using MapsterMapper;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers.Admin
