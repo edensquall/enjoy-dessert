@@ -1,13 +1,13 @@
 # Step 1: Build Angular application
 FROM node:16 AS angular-builder
-WORKDIR /app
+WORKDIR /app/client
 
 # Copy package.json and install dependencies
 COPY /client/package.json /client/package-lock.json ./
 RUN npm install
 
 # Copy the rest of the application code and build it
-COPY . ./
+COPY . ../
 
 # 切換到 /client 資料夾
 WORKDIR /app/client
