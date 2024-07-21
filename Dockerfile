@@ -8,9 +8,6 @@ RUN npm install
 
 # Copy the rest of the application code and build it
 COPY . ../
-
-# 切換到 /client 資料夾
-WORKDIR /app/client
 RUN npm run build --prod
 
 # Step 2: Build .NET application
