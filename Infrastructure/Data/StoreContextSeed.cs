@@ -20,6 +20,7 @@ namespace Infrastructure.Data
 
                     var productTypes = JsonSerializer.Deserialize<List<ProductType>>(productTypesData);
                     context.AddRange(productTypes);
+                    await context.SaveChangesAsync();
                 }
 
                 if (!context.Products.Any())
@@ -28,6 +29,7 @@ namespace Infrastructure.Data
 
                     var products = JsonSerializer.Deserialize<List<Product>>(productsData);
                     context.AddRange(products);
+                    await context.SaveChangesAsync();
                 }
 
                 if (!context.ProductImages.Any())
@@ -36,6 +38,7 @@ namespace Infrastructure.Data
 
                     var productImages = JsonSerializer.Deserialize<List<ProductImage>>(productImagesData);
                     context.AddRange(productImages);
+                    await context.SaveChangesAsync();
                 }
 
                 if (!context.News.Any())
@@ -44,6 +47,7 @@ namespace Infrastructure.Data
 
                     var news = JsonSerializer.Deserialize<List<News>>(newsData);
                     context.AddRange(news);
+                    await context.SaveChangesAsync();
                 }
 
                 if (!context.Slides.Any())
@@ -52,6 +56,7 @@ namespace Infrastructure.Data
 
                     var slides = JsonSerializer.Deserialize<List<Slide>>(slidesData);
                     context.AddRange(slides);
+                    await context.SaveChangesAsync();
                 }
                 if (!context.DeliveryMethods.Any())
                 {
@@ -59,10 +64,6 @@ namespace Infrastructure.Data
 
                     var methods = JsonSerializer.Deserialize<List<DeliveryMethod>>(dmData);
                     context.AddRange(methods);
-                }
-
-                if (context.ChangeTracker.HasChanges())
-                {
                     await context.SaveChangesAsync();
                 }
             }

@@ -1,16 +1,13 @@
 [
     {
-        "Id": 1,
         "Image": "Slide1.jpg",
         "Url": "/news/1"
     },
     {
-        "Id": 2,
         "Image": "Slide2.jpg",
         "Url": "/news/2"
     },
     {
-        "Id": 3,
         "Image": "Slide3.jpg",
         "Url": "/news/3"
     }

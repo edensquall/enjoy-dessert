@@ -1,34 +1,29 @@
 [
     {
-        "Id": 1,
         "ShortName": "7-ELEVEN",
         "Description": "7-11超商取貨",
         "DeliveryTime": "2天",
         "Price": 60
     },
     {
-        "Id": 2,
         "ShortName": "全家",
         "Description": "全家超商取貨",
         "DeliveryTime": "2天",
         "Price": 60
     },
     {
-        "Id": 3,
         "ShortName": "萊爾富",
         "Description": "萊爾富超商取貨",
         "DeliveryTime": "2天",
         "Price": 50
     },
     {
-        "Id": 4,
         "ShortName": "OK",
         "Description": "OK超商取貨",
         "DeliveryTime": "2天",
         "Price": 50
     },
     {
-        "Id": 5,
         "ShortName": "宅配",
         "Description": "直接將貨物配送到府",
         "DeliveryTime": "2-3天",
