@@ -8,7 +8,7 @@ namespace Infrastructure.Data
 {
     public class StoreContextSeed
     {
-        public static async Task SeedAsync(StoreContext context, ILoggerFactory loggerFactory)
+        public static async Task SeedAsync(StoreContext context, ILoggerFactory loggerFactory, string apiUrl)
         {
             try
             {
@@ -45,8 +45,17 @@ namespace Infrastructure.Data
                 {
                     var newsData = File.ReadAllText(path + @"/Data/SeedData/news.json");
 
-                    var news = JsonSerializer.Deserialize<List<News>>(newsData);
-                    context.AddRange(news);
+                    var newsList = JsonSerializer.Deserialize<List<News>>(newsData);
+
+                    if (!string.IsNullOrWhiteSpace(apiUrl))
+                    {
+                        foreach (var news in newsList)
+                        {
+                            news.Content = news.Content?.Replace("src=\"/Content", $"src=\"{apiUrl.TrimEnd('/')}");
+                        }
+                    }
+
+                    context.News.AddRange(newsList);
                     await context.SaveChangesAsync();
                 }
 

@@ -69,11 +69,12 @@ using (var scope = app.Services.CreateScope())
 {
     var services = scope.ServiceProvider;
     var loggerFactory = services.GetRequiredService<ILoggerFactory>();
+    var config = services.GetRequiredService<IConfiguration>();
     try
     {
         var context = services.GetRequiredService<StoreContext>();
         await context.Database.MigrateAsync();
-        await StoreContextSeed.SeedAsync(context, loggerFactory);
+        await StoreContextSeed.SeedAsync(context, loggerFactory, config["ApiUrl"] ?? string.Empty);
 
         var userManager = services.GetRequiredService<UserManager<AppUser>>();
         var roleManager = services.GetRequiredService<RoleManager<AppRole>>();
