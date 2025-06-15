@@ -112,12 +112,12 @@ dotnet run --project API
 cd client
 
 # 編譯並輸出至 ../API/wwwroot（供後端靜態檔案使用）
-ng build --prod
+ng build --configuration production
 ```
 
 #### 後端(部署)
 
 ```bash
-# 發佈後端專案至 /publish 資料夾
+# 發佈後端專案
 dotnet publish -c Release
 ```
