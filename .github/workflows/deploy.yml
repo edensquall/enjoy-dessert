@@ -20,7 +20,7 @@ jobs:
 
     - name: Check for changes in service path
       run: |
-        if git diff --quiet HEAD^ HEAD -- ./services ./Dockerfile; then
+        if git diff --quiet HEAD^ HEAD -- /API ./client ./Core ./Infrastructure ./Dockerfile; then
           echo "No changes detected. Skipping build and deploy."
           echo "continue=false" >> $GITHUB_ENV
         else
