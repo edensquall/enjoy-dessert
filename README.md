@@ -4,6 +4,8 @@
 
 🍰 [瀏覽線上網站](https://enjoydessert.store)
 
+## 專案簡介
+
 enjoy-dessert 是一個為虛構甜點品牌打造的官方網站專案，具備完整的前台購物與後台管理功能。使用者可透過前台瀏覽商品、下單購買與查詢訂單，管理員則可透過後台管理商品與訂單、發布消息等。
 
 本專案採用前後端分離架構，前端以 Angular 實作單頁式應用，後端則使用 ASP.NET Core Web API，搭配 PostgreSQL 與 Redis 提升資料處理效能。
