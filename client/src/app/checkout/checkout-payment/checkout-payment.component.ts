@@ -14,6 +14,7 @@ import { BasketService } from 'src/app/basket/basket.service';
 import { IBasket } from 'src/app/shared/models/basket';
 import { HelperService } from 'src/app/shared/services/helper.service';
 import { CheckoutService } from '../checkout.service';
+import { environment } from 'src/environments/environment';
 
 declare var Stripe: (arg0: string) => any;
 
@@ -60,9 +61,7 @@ export class CheckoutPaymentComponent implements AfterViewInit, OnDestroy {
   ) {}
 
   ngAfterViewInit() {
-    this.stripe = Stripe(
-      'pk_test_51KvxgzCnNSKKndWAO2Yl7URzpxhtwIb5BqICW1Wkhsd2bUnFvyALPbW784SFl0SzSvZD4TPIvsOmtqKzjIKhUbGX00mUQlwHWS'
-    );
+    this.stripe = Stripe(environment.stripePublishableKey);
     const elements = this.stripe.elements();
 
     this.cardNumber = elements.create('cardNumber');
