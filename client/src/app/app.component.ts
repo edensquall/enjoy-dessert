@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { BasketService } from './basket/basket.service';
 import { AccountService } from './account/account.service';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
-import { Observable, map } from 'rxjs';
+import { Observable, map, of } from 'rxjs';
+import { ChatService } from './chat/chat.service';
 
 @Component({
   selector: '[app-root]',
@@ -16,6 +17,7 @@ export class AppComponent implements OnInit {
   constructor(
     private basketService: BasketService,
     private accountService: AccountService,
+    private chatService: ChatService,
     private router: Router
   ) {}
 

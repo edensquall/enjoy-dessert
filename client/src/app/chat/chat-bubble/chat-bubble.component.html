@@ -1,0 +1,14 @@
+<div class="chat-row" [ngClass]="chat.speaker === 'user' ? 'justify-end' : 'justify-start'">
+  <img *ngIf="chat.speaker === 'ai'" src="assets/images/assistant.svg" alt="AI" />
+  <div class="chat-bubble-wrapper" [ngClass]="chat.speaker === 'user' ? 'user-wrapper' : ''">
+    <div class="chat-bubble" [ngClass]="chat.speaker">
+      <ng-container *ngIf="chat.isHtml; else plain">
+        <div [innerHTML]="chat.content"></div>
+      </ng-container>
+      <ng-template #plain>
+        <p>{{ chat.content }}</p>
+      </ng-template>
+    </div>
+    <span class="timestamp">{{ chat.timestamp | date:'a hh:mm' }}</span>
+  </div>
+</div>

@@ -21,6 +21,10 @@ export class LoadingInterceptor implements HttpInterceptor {
       return next.handle(req);
     }
 
+    if (req.method === 'POST' && req.url.includes('chat')) {
+      return next.handle(req);
+    }
+
     if (req.method === 'DELETE') {
       return next.handle(req);
     }
