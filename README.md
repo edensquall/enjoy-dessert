@@ -6,7 +6,7 @@
 
 ## 專案簡介
 
-enjoy-dessert 是一個為虛構甜點品牌打造的官方網站專案，具備完整的前台購物與後台管理功能。使用者可透過前台瀏覽商品、下單購買與查詢訂單，管理員則可透過後台管理商品與訂單、發布消息等。
+enjoy-dessert 是一個為虛構甜點品牌打造的官方網站專案，提供完整的前台購物與後台管理功能。前台支援商品瀏覽、下單購買、訂單查詢與 AI 智能客服聊天；後台則提供商品與訂單管理、消息發布等功能。
 
 本專案採用前後端分離架構，前端以 Angular 實作單頁式應用，後端則使用 ASP.NET Core Web API，搭配 PostgreSQL 與 Redis 提升資料處理效能。
 
@@ -32,6 +32,7 @@ enjoy-dessert 是一個為虛構甜點品牌打造的官方網站專案，具備
 - 商品下單與訂單查詢
 - 購物車功能（支援未登入狀態，資料儲存在 Redis）
 - Stripe 金流整合，提供線上付款功能（支援測試模式）
+- AI 智能客服聊天（提供商品資訊、推薦熱銷商品、回答商品問題）
 
 ### 後台功能（管理員）
 
@@ -50,7 +51,7 @@ enjoy-dessert 是一個為虛構甜點品牌打造的官方網站專案，具備
 
 若設定為正式金鑰，則可切換為實際金流交易。
 
-### 環境變數與金流設定
+### Stripe 金流環境設定
 
 Stripe 整合功能需要以下三個設定項目，請妥善管理這些敏感資訊以確保安全性：
 
@@ -64,12 +65,41 @@ Stripe 整合功能需要以下三個設定項目，請妥善管理這些敏感�
 
 這些設定可以放置於 `appsettings.json`、`appsettings.Development.json`，或透過環境變數提供。為了資訊安全，建議使用環境變數方式注入，而非直接寫入設定檔中。
 
+## AI 智能客服聊天
+
+提供與 AI 智能客服即時互動能力，支援以下功能：
+
+- 介紹甜點種類與詳細資訊
+- 推薦熱銷商品
+- 回答甜點相關問題
+
+### AI 智能客服環境設定
+
+AI 智能客服聊天功能依賴以下設定，請妥善管理這些敏感資訊以確保安全性：
+
+```json
+"ChatSettings": {
+  "Enabled": true, // 是否開啟功能
+  "OpenAI": {
+    "ChatModelId": "<CHAT_MODEL_ID>", 
+    "EmbeddingModelId": "<EMBEDDING_MODEL_ID>",
+    "ApiKey": "<API_KEY>"
+  },
+  "MemorySettings": {
+    "ShortTermRounds": 3 // 記錄最近幾回合對話，減少 token 消耗
+  }
+}
+```
+
+這些設定可以放置於 `appsettings.json`、`appsettings.Development.json`，或透過環境變數提供。為了資訊安全，建議使用環境變數方式注入，而非直接寫入設定檔中。
+
 ## 架構與實作概念
 
 - 採用分層式架構（Layered Architecture），劃分 API、Domain、Infrastructure 與 Client 各層責任
 - 使用 Repository Pattern、Unit of Work Pattern 管理資料存取與交易一致性
 - 使用 Specification Pattern 封裝複雜查詢條件，提高查詢邏輯重用性
 - 整合 Redis 快取部分資料（如商品列表、熱銷商品與詳細資訊）以減少資料庫壓力
+- AI 智能客服透過自訂 Plugin/Function 呼叫後端服務查詢資料庫，提供即時商品資訊、推薦與問題解答
 
 ## 使用技術
 
@@ -80,6 +110,7 @@ Stripe 整合功能需要以下三個設定項目，請妥善管理這些敏感�
 | 資料庫   | PostgreSQL                             |
 | 快取     | Redis                                  |
 | 金流     | Stripe（支援 Test 與 Live 模式）       |
+| AI智能客服 | Semantic Kernel, OpenAI Chat Model |
 | 設計工具 | Figma, HTML/CSS/JavaScript (Prototype) |
 
 ## 專案執行
