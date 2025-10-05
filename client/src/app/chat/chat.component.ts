@@ -15,12 +15,12 @@ export class ChatComponent implements OnInit {
   input: string = '';
   loading: boolean = false;
   isComposing = false;
+  shouldScroll = false;
 
   chats: IChat[] = [
     {
       speaker: 'ai',
-      content:
-        `
+      content: `
         <p>歡迎光臨 <strong>enjoy<span class="red-dot">.</span></strong>！我是智能客服助理，能提供：</p>
         <ul>
           <li>甜點種類與詳細資訊</li>
@@ -30,7 +30,7 @@ export class ChatComponent implements OnInit {
         <p>您想先了解哪一部分呢？</p>
         `,
       timestamp: new Date(),
-      isHtml: true
+      isHtml: true,
     },
   ];
 
@@ -43,7 +43,10 @@ export class ChatComponent implements OnInit {
   }
 
   ngAfterViewChecked() {
-    this.scrollToBottom();
+    if (this.shouldScroll) {
+      this.scrollToBottom();
+      this.shouldScroll = false;
+    }
   }
 
   onCompositionStart() {
@@ -71,6 +74,7 @@ export class ChatComponent implements OnInit {
 
   addMessage(content: string, speaker: 'user' | 'ai') {
     this.chats.push({ speaker, content, timestamp: new Date() });
+    this.shouldScroll = true;
   }
 
   closeChat() {
