@@ -7,14 +7,14 @@ using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 namespace Infrastructure.Services
 {
-  public class GptRagService : IGptRagService
+  public class ChatService : IChatService
   {
     private readonly IConfiguration _config;
     private readonly IChatCompletionService _chat;
     private readonly Kernel _kernel;
     private readonly int _shortTermRounds;
     private readonly IChatHistoryRepository<ChatHistory> _chatHistoryRepository;
-    public GptRagService(IConfiguration config, IChatCompletionService chat, Kernel kernel, ProductPlugin productPlugin, IChatHistoryRepository<ChatHistory> chatHistoryRepository)
+    public ChatService(IConfiguration config, IChatCompletionService chat, Kernel kernel, ProductPlugin productPlugin, IChatHistoryRepository<ChatHistory> chatHistoryRepository)
     {
       _kernel = kernel;
       _chat = chat;
@@ -28,7 +28,7 @@ namespace Infrastructure.Services
       }
     }
 
-    public async Task<string> AnswerWithRag(string question, string token)
+    public async Task<string> AnswerWithProductPlugin(string question, string token)
     {
       var chatHistory = await _chatHistoryRepository.GetChatHistoryAsync(token);
 
@@ -52,7 +52,7 @@ namespace Infrastructure.Services
 
       chatHistory.AddAssistantMessage(answer);
       TrimChatHistory(chatHistory, _shortTermRounds);
-      
+
       await _chatHistoryRepository.UpdateChatHistoryAsync(token, chatHistory);
 
       return answer;

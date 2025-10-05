@@ -19,7 +19,7 @@ namespace API.Extensions
             services.AddScoped<IOrderService, OrderService>();
             services.AddScoped<IPaymentService, PaymentService>();
             services.AddScoped<IAgentService, AgentService>();
-            services.AddScoped<IGptRagService, GptRagService>();
+            services.AddScoped<IChatService, ChatService>();
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
             services.AddScoped<IBasketRepository, BasketRepository>();
@@ -53,12 +53,12 @@ namespace API.Extensions
                     apiKey: config["ChatSettings:OpenAI:ApiKey"]
                 );
 
-                #pragma warning disable SKEXP0010
+#pragma warning disable SKEXP0010
                 builder.AddOpenAIEmbeddingGenerator(
                     modelId: config["ChatSettings:OpenAI:EmbeddingModelId"],
                     apiKey: config["ChatSettings:OpenAI:ApiKey"]
                 );
-                #pragma warning restore SKEXP0010
+#pragma warning restore SKEXP0010
 
                 builder.Plugins.AddFromObject(new ProductPlugin(sp));
                 return builder.Build();

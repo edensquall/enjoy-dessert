@@ -4,15 +4,15 @@ namespace Infrastructure.Services
 {
   public class AgentService : IAgentService
   {
-    private readonly IGptRagService _gptRagService;
-    public AgentService(IGptRagService gptRagService)
+    private readonly IChatService _chatService;
+    public AgentService(IChatService chatRagService)
     {
-      _gptRagService = gptRagService;
+      _chatService = chatRagService;
     }
 
     public async Task<string> HandleUserInput(string input, string token)
     {
-      return await _gptRagService.AnswerWithRag(input, token);
+      return await _chatService.AnswerWithProductPlugin(input, token);
     }
   }
 }
