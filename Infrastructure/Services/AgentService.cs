@@ -5,9 +5,9 @@ namespace Infrastructure.Services
   public class AgentService : IAgentService
   {
     private readonly IChatService _chatService;
-    public AgentService(IChatService chatRagService)
+    public AgentService(IChatService chatService)
     {
-      _chatService = chatRagService;
+      _chatService = chatService;
     }
 
     public async Task<string> HandleUserInput(string input, string token)
