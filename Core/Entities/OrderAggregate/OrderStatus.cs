@@ -17,7 +17,7 @@ namespace Core.Entities.OrderAggregate
         PaymentFailed,
         [Description("待取貨")]
         PendingPickup,
-        [Description("待取貨")]
+        [Description("已完成")]
         Complete
     }
 }
