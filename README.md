@@ -21,7 +21,7 @@ enjoy-dessert 是一個為虛構甜點品牌打造的官方網站專案，提供
 3. **Core**
    定義 Entity、Repository Interface、Service Interface 與查詢規格（Specification Pattern）。
 4. **Infrastructure**
-   實作 Repository、Service、資料庫設定、資料遷移（Migrations），並整合 Redis 快取機制。
+   實作 Repository、Service、資料庫設定與資料遷移（Migrations），建立 Redis 快取機制，並建立 AI Agent 技術結構，包含 Agents 類別與 Tools 工具，提供代理人初始化與依賴注入的支援。
 
 ## 功能簡介
 
@@ -32,7 +32,7 @@ enjoy-dessert 是一個為虛構甜點品牌打造的官方網站專案，提供
 - 商品下單與訂單查詢
 - 購物車功能（支援未登入狀態，資料儲存在 Redis）
 - Stripe 金流整合，提供線上付款功能（支援測試模式）
-- AI 智能客服聊天（提供商品資訊、推薦熱銷商品、回答商品問題）
+- AI 智能客服聊天（提供商品資訊、推薦熱銷商品、回答商品問題、查詢訂單）
 
 ### 後台功能（管理員）
 
@@ -72,6 +72,7 @@ Stripe 整合功能需要以下三個設定項目，請妥善管理這些敏感�
 - 介紹甜點種類與詳細資訊
 - 推薦熱銷商品
 - 回答甜點相關問題
+- 查詢訂單
 
 ### AI 智能客服環境設定
 
@@ -86,7 +87,8 @@ AI 智能客服聊天功能依賴以下設定，請妥善管理這些敏感資�
     "ApiKey": "<API_KEY>"
   },
   "MemorySettings": {
-    "ShortTermRounds": 3 // 記錄最近幾回合對話，減少 token 消耗
+    "ShortTermRounds": 3,  // 保留最近 3 回合對話，降低 token 使用量
+    "ShortTermMinutes": 10 // 對話記憶維持 10 分鐘後清除，避免長期累積
   }
 }
 ```
@@ -99,7 +101,7 @@ AI 智能客服聊天功能依賴以下設定，請妥善管理這些敏感資�
 - 使用 Repository Pattern、Unit of Work Pattern 管理資料存取與交易一致性
 - 使用 Specification Pattern 封裝複雜查詢條件，提高查詢邏輯重用性
 - 整合 Redis 快取部分資料（如商品列表、熱銷商品與詳細資訊）以減少資料庫壓力
-- AI 智能客服透過自訂 Plugin/Function 呼叫後端服務查詢資料庫，提供即時商品資訊、推薦與問題解答
+- AI 智能客服透過自訂 Tool 查詢後端資料庫，並採用Microsoft Agent Framework 實現多代理協調與任務分派
 
 ## 使用技術
 
@@ -110,7 +112,7 @@ AI 智能客服聊天功能依賴以下設定，請妥善管理這些敏感資�
 | 資料庫   | PostgreSQL                             |
 | 快取     | Redis                                  |
 | 金流     | Stripe（支援 Test 與 Live 模式）       |
-| AI智能客服 | Semantic Kernel, OpenAI Chat Model |
+| AI智能客服 | Microsoft Agent Framework, OpenAI API |
 | 設計工具 | Figma, HTML/CSS/JavaScript (Prototype) |
 
 ## 專案執行
