@@ -1,4 +1,4 @@
-namespace Core.Contracts
+namespace Infrastructure.Contracts
 {
     public class ProductTypeContract
     {

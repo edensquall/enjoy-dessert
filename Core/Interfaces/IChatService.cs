@@ -2,6 +2,6 @@ namespace Core.Interfaces
 {
     public interface IChatService
     {
-        Task<string> AnswerWithProductPlugin(string question, string token);
+        Task<string> AnswerWithHandoffAsync(string question, string token, string userName);
     }
 }

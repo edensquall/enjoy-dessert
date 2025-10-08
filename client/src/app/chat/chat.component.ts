@@ -23,9 +23,10 @@ export class ChatComponent implements OnInit {
       content: `
         <p>歡迎光臨 <strong>enjoy<span class="red-dot">.</span></strong>！我是智能客服助理，能提供：</p>
         <ul>
-          <li>甜點種類與詳細資訊</li>
-          <li>熱銷商品推薦</li>
+          <li>查詢甜點種類與詳細資訊</li>
+          <li>推薦熱銷商品</li>
           <li>回答甜點相關問題</li>
+          <li>查詢訂單(需登入)</li>
         </ul>
         <p>您想先了解哪一部分呢？</p>
         `,

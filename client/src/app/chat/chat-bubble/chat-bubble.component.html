@@ -6,7 +6,7 @@
         <div [innerHTML]="chat.content"></div>
       </ng-container>
       <ng-template #plain>
-        <p>{{ chat.content }}</p>
+        <p class="multiline">{{ chat.content }}</p>
       </ng-template>
     </div>
     <span class="timestamp">{{ chat.timestamp | date:'a hh:mm' }}</span>

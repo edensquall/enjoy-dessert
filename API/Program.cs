@@ -2,6 +2,7 @@ using API.Extensions;
 using API.Middleware;
 using Core.Entities.Identity;
 using Infrastructure.Data;
+using Infrastructure.Extensions;
 using Infrastructure.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -26,7 +27,8 @@ builder.Services.AddSingleton<IConnectionMultiplexer>(c =>
 });
 
 builder.Services.AddMapsterServices();
-builder.Services.AddApplicationServices(builder.Configuration);
+builder.Services.AddApplicationServices();
+builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
 builder.Services.AddSwaggerDocumentation();
 builder.Services.AddCors(opt =>

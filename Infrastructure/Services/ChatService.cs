@@ -1,81 +1,80 @@
 using Core.Interfaces;
-using Infrastructure.AIPlugins;
+using Infrastructure.Agent.Agents;
+using Microsoft.Agents.AI.Workflows;
+using Microsoft.Extensions.AI;
 using Microsoft.Extensions.Configuration;
-using Microsoft.SemanticKernel;
-using Microsoft.SemanticKernel.ChatCompletion;
-using Microsoft.SemanticKernel.Connectors.OpenAI;
 
 namespace Infrastructure.Services
 {
   public class ChatService : IChatService
   {
-    private readonly IConfiguration _config;
-    private readonly IChatCompletionService _chat;
-    private readonly Kernel _kernel;
     private readonly int _shortTermRounds;
-    private readonly IChatHistoryRepository<ChatHistory> _chatHistoryRepository;
-    public ChatService(IConfiguration config, IChatCompletionService chat, Kernel kernel, ProductPlugin productPlugin, IChatHistoryRepository<ChatHistory> chatHistoryRepository)
+    private readonly IChatHistoryRepository<List<ChatMessage>> _chatHistoryRepository;
+    private readonly DispatcherAgent _dispatcherAgent;
+    private readonly DessertInfoAgent _dessertInfoAgent;
+    private readonly OrderSupportAgent _orderSupportAgent;
+    public ChatService(IConfiguration config, IChatHistoryRepository<List<ChatMessage>> chatHistoryRepository, DispatcherAgent dispatcherAgent, DessertInfoAgent dessertInfoAgent, OrderSupportAgent orderSupportAgent)
     {
-      _kernel = kernel;
-      _chat = chat;
-      _config = config;
-      _shortTermRounds = _config.GetValue<int>("ChatSettings:MemorySettings:ShortTermRounds");
+      _orderSupportAgent = orderSupportAgent;
+      _dessertInfoAgent = dessertInfoAgent;
+      _dispatcherAgent = dispatcherAgent;
+      _shortTermRounds = config.GetValue<int>("ChatSettings:MemorySettings:ShortTermRounds");
       _chatHistoryRepository = chatHistoryRepository;
-
-      if (!kernel.Plugins.Contains("ProductPlugin"))
-      {
-        kernel.Plugins.AddFromObject(productPlugin, "ProductPlugin");
-      }
     }
 
-    public async Task<string> AnswerWithProductPlugin(string question, string token)
+    public async Task<string> AnswerWithHandoffAsync(string question, string token, string userName)
     {
-      var chatHistory = await _chatHistoryRepository.GetChatHistoryAsync(token);
+      var messages = await _chatHistoryRepository.GetChatHistoryAsync(token);
 
-      if (!chatHistory.Any())
+      messages.Add(new ChatMessage(ChatRole.User, question));
+      messages.Add(new ChatMessage(ChatRole.System,
+
+    string.IsNullOrWhiteSpace(userName)
+        ? "User is not logged in"
+        : $"User is logged in as {userName}"));
+
+      var workflow = AgentWorkflowBuilder.CreateHandoffBuilderWith(_dispatcherAgent.Agent)
+                      .WithHandoffs(_dispatcherAgent.Agent, [_dessertInfoAgent.Agent, _orderSupportAgent.Agent])
+                      .WithHandoff(_dessertInfoAgent.Agent, _dispatcherAgent.Agent, "非甜點相關→DispatcherAgent")
+                      .WithHandoff(_orderSupportAgent.Agent, _dispatcherAgent.Agent, "非訂單相關→DispatcherAgent")
+                      .Build();
+
+      StreamingRun run = await InProcessExecution.StreamAsync(workflow, messages);
+      await run.TrySendMessageAsync(new TurnToken(emitEvents: true));
+
+      await foreach (WorkflowEvent evt in run.WatchStreamAsync().ConfigureAwait(false))
       {
-        chatHistory.AddSystemMessage(
-            "你是Enjoy Dessert甜點店客服，提供甜點種類、熱銷商品及資訊。回答專業簡明禮貌，資訊必查工具，不可臆造。購買請至網頁，不說販售"
-        );
+        if (evt is WorkflowOutputEvent outputEvent)
+        {
+          messages = (List<ChatMessage>)outputEvent.Data!;
+          break;
+        }
       }
 
-      chatHistory.AddUserMessage($"使用者問題:{question}");
+      TrimChatHistory(messages, _shortTermRounds);
 
-      OpenAIPromptExecutionSettings promptExecutionSettings = new()
-      {
-        ToolCallBehavior = ToolCallBehavior.AutoInvokeKernelFunctions
-      };
+      await _chatHistoryRepository.UpdateChatHistoryAsync(token, messages);
 
-      var response = await _chat.GetChatMessageContentAsync(chatHistory, promptExecutionSettings, _kernel);
-
-      string answer = response.Content ?? string.Empty;
-
-      chatHistory.AddAssistantMessage(answer);
-      TrimChatHistory(chatHistory, _shortTermRounds);
-
-      await _chatHistoryRepository.UpdateChatHistoryAsync(token, chatHistory);
-
-      return answer;
+      return messages.Last(m => m.Role == ChatRole.Assistant).Text;
     }
 
-    private void TrimChatHistory(ChatHistory chatHistory, int maxUserRounds)
+    private void TrimChatHistory(List<ChatMessage> chatMessages, int maxUserRounds)
     {
       int userRoundCount = 0;
-      int cutoffIndex = 1;
+      int cutoffIndex = 0;
 
-      for (int i = chatHistory.Count - 1; i > 0 && userRoundCount < maxUserRounds; i--)
+      for (int i = chatMessages.Count - 1; i >= 0 && userRoundCount < maxUserRounds; i--)
       {
-        if (chatHistory[i].Role == AuthorRole.User)
+        if (chatMessages[i].Role == ChatRole.User)
         {
           cutoffIndex = i;
           userRoundCount++;
         }
       }
 
-      if (cutoffIndex > 1)
+      if (cutoffIndex > 0)
       {
-        int removeCount = cutoffIndex - 1;
-        chatHistory.RemoveRange(1, removeCount);
+        chatMessages.RemoveRange(0, cutoffIndex);
       }
     }
   }

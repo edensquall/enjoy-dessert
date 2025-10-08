@@ -1,25 +1,24 @@
 using System.ComponentModel;
-using Core.Contracts;
+using Infrastructure.Contracts;
 using Core.Entities;
 using Core.Interfaces;
 using Core.Specifications;
 using MapsterMapper;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.SemanticKernel;
+using Infrastructure.Agent.Contracts;
 
-namespace Infrastructure.AIPlugins
+namespace Infrastructure.Agent.Tools
 {
-    public class ProductPlugin
+    public class ProductTool
     {
         private readonly IServiceProvider _serviceProvider;
-        public ProductPlugin(IServiceProvider serviceProvider)
+        public ProductTool(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        [KernelFunction("get_products")]
         [Description("取得產品清單")]
-        public async Task<List<ProductSummaryContract>> GetProducts()
+        public async Task<ResultContract<List<ProductSummaryContract>>> GetProducts()
         {
             using var scope = _serviceProvider.CreateScope();
             var uow = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
@@ -28,13 +27,12 @@ namespace Infrastructure.AIPlugins
             ProductSpecParams productParams = new ProductSpecParams { PageSize = 50 };
             var spec = new ProductWithFiltersAndAllowShowingSpecificication(productParams);
             var products = await uow.Repository<Product>().ListAsync(spec);
-            
-            return mapper.Map<List<ProductSummaryContract>>(products);
+
+            return ResultContract<List<ProductSummaryContract>>.Ok(mapper.Map<List<ProductSummaryContract>>(products));
         }
 
-        [KernelFunction("get_product")]
         [Description("取得產品詳細資訊")]
-        public async Task<ProductDetailContract> GetProduct(int id)
+        public async Task<ResultContract<ProductDetailContract>> GetProduct([Description("產品ID")] int id)
         {
             using var scope = _serviceProvider.CreateScope();
             var uow = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
@@ -42,13 +40,12 @@ namespace Infrastructure.AIPlugins
 
             var spec = new ProductByIdAndAllowShowingSpecification(id);
             var product = await uow.Repository<Product>().GetEntityWithSpec(spec);
-            
-            return mapper.Map<ProductDetailContract>(product);
+
+            return ResultContract<ProductDetailContract>.Ok(mapper.Map<ProductDetailContract>(product));
         }
 
-        [KernelFunction("get_bestseller")]
         [Description("取得熱銷商品")]
-        public async Task<List<ProductSummaryContract>> GetBestseller()
+        public async Task<ResultContract<List<ProductSummaryContract>>> GetBestseller()
         {
             using var scope = _serviceProvider.CreateScope();
             var uow = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
@@ -57,12 +54,11 @@ namespace Infrastructure.AIPlugins
             var spec = new ProductIsBestsellerAndAllowShowingSpecification();
             var products = await uow.Repository<Product>().ListAsync(spec);
 
-            return mapper.Map<List<ProductSummaryContract>>(products);
+            return ResultContract<List<ProductSummaryContract>>.Ok(mapper.Map<List<ProductSummaryContract>>(products));
         }
 
-        [KernelFunction("get_product_types")]
         [Description("取得產品類型清單")]
-        public async Task<List<ProductTypeContract>> GetProductTypes()
+        public async Task<ResultContract<List<ProductTypeContract>>> GetProductTypes()
         {
             using var scope = _serviceProvider.CreateScope();
             var uow = scope.ServiceProvider.GetRequiredService<IUnitOfWork>();
@@ -70,7 +66,7 @@ namespace Infrastructure.AIPlugins
 
             var productTypes = await uow.Repository<ProductType>().ListAllAsync();
 
-            return mapper.Map<List<ProductTypeContract>>(productTypes);
+            return ResultContract<List<ProductTypeContract>>.Ok(mapper.Map<List<ProductTypeContract>>(productTypes));
         }
     }
 }

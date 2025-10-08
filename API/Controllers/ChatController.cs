@@ -1,5 +1,6 @@
 using API.Dtos;
 using API.Errors;
+using API.Extensions;
 using Core.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,7 +8,7 @@ namespace API.Controllers
 {
     public class ChatController : BaseApiController
     {
-        private readonly IAgentService _agentService;
+        private readonly IChatService _chatService;
         private readonly IConfiguration _config;
         private bool ChatEnabled
         {
@@ -20,10 +21,10 @@ namespace API.Controllers
             }
         }
 
-        public ChatController(IConfiguration config, IAgentService agentService)
+        public ChatController(IConfiguration config, IChatService chatService)
         {
             _config = config;
-            _agentService = agentService;
+            _chatService = chatService;
         }
 
         [HttpGet("enabled")]
@@ -57,7 +58,10 @@ namespace API.Controllers
             if (string.IsNullOrEmpty(token) || !Guid.TryParseExact(token, "N", out _))
                 return Unauthorized();
 
-            var answer = await _agentService.HandleUserInput(questionDto.Question, token);
+
+            var userName = User.RetrieveUserNameFromPrincipal();
+
+            var answer = await _chatService.AnswerWithHandoffAsync(questionDto.Question, token, userName);
 
             if (answer == null) return BadRequest(new ApiResponse(400, "Problem asking question"));
 
