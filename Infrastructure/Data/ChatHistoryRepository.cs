@@ -27,7 +27,7 @@ namespace Infrastructure.Data
             if (data.IsNullOrEmpty)
                 return new T();
 
-            var result = JsonSerializer.Deserialize<T>(data!);
+            var result = JsonSerializer.Deserialize<T>((string)data!);
             return result ?? new T();
         }
 
