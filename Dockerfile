@@ -11,7 +11,7 @@ COPY . ../
 RUN npm run build --prod
 
 # Step 2: Build .NET application
-FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build-env
+FROM mcr.microsoft.com/dotnet/sdk:10.0 AS build-env
 WORKDIR /app
 
 COPY --from=angular-builder /app ./
@@ -22,7 +22,7 @@ RUN dotnet restore
 RUN dotnet publish -c Release -o out
 
 # Step 3: Create runtime image
-FROM mcr.microsoft.com/dotnet/aspnet:8.0
+FROM mcr.microsoft.com/dotnet/aspnet:10.0
 WORKDIR /app
 COPY --from=build-env /app/out .
 ENTRYPOINT ["dotnet", "API.dll"]
