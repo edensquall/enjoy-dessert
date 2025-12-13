@@ -38,11 +38,16 @@ builder.Services.AddCors(opt =>
         policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
     });
 });
-
+builder.Services.AddResponseCompression(opt =>
+{
+    opt.EnableForHttps = true;
+});
 
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseResponseCompression();
 
 app.UseSwaggerDocumention();
 
