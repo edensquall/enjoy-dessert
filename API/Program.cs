@@ -30,7 +30,7 @@ builder.Services.AddMapsterServices();
 builder.Services.AddApplicationServices();
 builder.Services.AddInfrastructureServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
-builder.Services.AddSwaggerDocumentation();
+builder.Services.AddScalarDocumentation();
 builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("CorsPolicy", policy =>
@@ -49,7 +49,7 @@ app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseResponseCompression();
 
-app.UseSwaggerDocumention();
+app.UseScalarDocumention();
 
 app.UseStatusCodePagesWithReExecute("/errors/{0}");
 
