@@ -150,7 +150,19 @@ namespace API.Controllers
                 });
             }
 
-            return _mapper.Map<UserDto>(user);
+            var userDto = _mapper.Map<UserDto>(user);
+            userDto.Token = await _tokenService.CreateTokenAsync(user);
+            var refreshToken = await _tokenService.CreateRefreshTokenAsync(user, HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown");
+            Response.Cookies.Append("refreshToken", refreshToken.Token,
+                new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.Strict,
+                    Expires = refreshToken.ExpiresAt
+                });
+
+            return userDto;
         }
 
         [HttpPost("register")]
@@ -184,7 +196,71 @@ namespace API.Controllers
 
             if (!result.Succeeded) return BadRequest(new ApiResponse(400));
 
-            return _mapper.Map<UserDto>(user);
+            var userDto = _mapper.Map<UserDto>(user);
+            userDto.Token = await _tokenService.CreateTokenAsync(user);
+
+            var refreshToken = await _tokenService.CreateRefreshTokenAsync(user, HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown");
+            Response.Cookies.Append("refreshToken", refreshToken.Token,
+                new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.Strict,
+                    Expires = refreshToken.ExpiresAt
+                });
+
+            return userDto;
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout()
+        {
+            var refreshToken = Request.Cookies["refreshToken"];
+            if (refreshToken == null)
+                return Ok();
+
+            await _tokenService.RevokeRefreshTokenAsync(refreshToken, HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown");
+
+            Response.Cookies.Append("refreshToken", "",
+                new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.Strict,
+                    Expires = DateTime.UtcNow.AddDays(-1)
+                });
+            return Ok();
+        }
+
+        [HttpPost("refreshtoken")]
+        public async Task<ActionResult<RefreshTokenDto>> RefreshToken()
+        {
+            var refreshTokenString = Request.Cookies["refreshToken"] ?? string.Empty;
+
+            var refreshToken = await _tokenService.RefreshTokenAsync(refreshTokenString, HttpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown");
+
+            if (refreshToken == null)
+            {
+                return new BadRequestObjectResult(new ApiValidationErrorResponse
+                {
+                    Errors = new[]
+                    {"refresh token 驗證失敗"}
+                });
+            }
+
+            Response.Cookies.Append("refreshToken", refreshToken.Token,
+                new CookieOptions
+                {
+                    HttpOnly = true,
+                    Secure = true,
+                    SameSite = SameSiteMode.Strict,
+                    Expires = refreshToken.ExpiresAt
+                });
+
+            return Ok(new RefreshTokenDto
+            {
+                Token = await _tokenService.CreateTokenAsync(refreshToken.AppUser)
+            });
         }
     }
 }

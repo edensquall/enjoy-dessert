@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { map, of, ReplaySubject } from 'rxjs';
+import { map, Observable, of, ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { IAddress } from '../shared/models/address';
 import { IPassword } from '../shared/models/password';
@@ -38,7 +38,7 @@ export class AccountService {
   }
 
   login(values: any) {
-    return this.http.post<IUser>(this.baseUrl + 'account/login', values).pipe(
+    return this.http.post<IUser>(this.baseUrl + 'account/login', values, { withCredentials: true }).pipe(
       map((user: IUser) => {
         if (user) {
           localStorage.setItem('token', user.token);
@@ -50,7 +50,7 @@ export class AccountService {
 
   register(values: any) {
     return this.http
-      .post<IUser>(this.baseUrl + 'account/register', values)
+      .post<IUser>(this.baseUrl + 'account/register', values, { withCredentials: true })
       .pipe(
         map((user: IUser) => {
           if (user) {
@@ -61,10 +61,28 @@ export class AccountService {
       );
   }
 
-  logout() {
+  refreshToken(): Observable<{ token: string }> {
+    return this.http.post<{ token: string }>(
+      this.baseUrl + 'account/refreshtoken',
+      {},
+      { withCredentials: true }
+    );
+  }
+
+  private clearClientState() {
     localStorage.removeItem('token');
     this.currentUserSource.next(null);
     this.router.navigateByUrl('/');
+  }
+
+  logout() {
+    this.http.post(
+      this.baseUrl + 'account/logout',
+      {}, { withCredentials: true })
+      .subscribe({
+      next: () => this.clearClientState(),
+      error: () => this.clearClientState()
+    });
   }
 
   checkEmailExists(email: string) {
@@ -81,7 +99,10 @@ export class AccountService {
   }
 
   updateUserInfo(userInfo: IUserInfo) {
-    return this.http.put<IUserInfo>(this.baseUrl + 'account/userinfo', userInfo);
+    return this.http.put<IUserInfo>(
+      this.baseUrl + 'account/userinfo',
+      userInfo
+    );
   }
 
   updatePassword(password: IPassword) {

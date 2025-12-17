@@ -22,12 +22,6 @@ namespace API.Helpers
             .Map(d => d.ImageUrls, s => s.ProductImages.OrderBy(x => x.Order).Select(x => $"{MapContext.Current.GetService<IConfiguration>().GetValue<string>("ApiUrl")}product/{s.Id}/{x.Name}"))
             .Map(d => d.ImageUrlsIndex, s => s.ProductImages.OrderBy(x => x.Order).Select(x => x.Order));
 
-
-            config.NewConfig<AppUser, UserDto>()
-            .Map(d => d.UserName, s => s.UserName)
-            .Map(d => d.DisplayName, s => s.DisplayName)
-            .Map(d => d.Token, s => MapContext.Current.GetService<ITokenService>().CreateTokenAsync(s).Result);
-
             config.NewConfig<News, NewsDto>()
             .Map(d => d.ThumbnailUrl, s => string.IsNullOrEmpty(s.Thumbnail) ? null : $"{MapContext.Current.GetService<IConfiguration>().GetValue<string>("ApiUrl")}news/{s.Id}/{s.Thumbnail}");
 

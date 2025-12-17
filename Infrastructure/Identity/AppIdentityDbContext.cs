@@ -4,11 +4,13 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure.Identity
 {
-    public class AppIdentityDbContext : IdentityDbContext<AppUser,AppRole, string>
+    public class AppIdentityDbContext : IdentityDbContext<AppUser, AppRole, string>
     {
         public AppIdentityDbContext(DbContextOptions<AppIdentityDbContext> options) : base(options)
         {
         }
+        
+        public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

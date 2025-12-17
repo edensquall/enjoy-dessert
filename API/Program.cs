@@ -35,7 +35,11 @@ builder.Services.AddCors(opt =>
 {
     opt.AddPolicy("CorsPolicy", policy =>
     {
-        policy.AllowAnyHeader().AllowAnyMethod().WithOrigins("https://localhost:4200");
+        policy
+            .WithOrigins("https://localhost:4200")
+            .AllowAnyHeader()
+            .AllowAnyMethod()
+            .AllowCredentials();
     });
 });
 builder.Services.AddResponseCompression(opt =>
@@ -65,7 +69,7 @@ app.UseStaticFiles(new StaticFileOptions
 });
 
 app.UseCors("CorsPolicy");
-
+app.UseRouting();
 app.UseAuthentication();
 app.UseAuthorization();
 
