@@ -2,7 +2,7 @@
 
 ![Hero](https://github.com/user-attachments/assets/5091ca07-fd10-4d5e-8442-78d39959204c)
 
-🍰 [瀏覽線上網站](https://enjoydessert.store)
+🍰 [瀏覽線上網站](https://enjoydessert.site)
 
 ## 專案簡介
 
